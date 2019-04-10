@@ -8,4 +8,4 @@ applications:
   host: FinalASR
   domain: eu-gb.mybluemix.net
   services:
-  - asrDCBCloudantNoSQL
+  - Cloudant
