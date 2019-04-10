@@ -5,7 +5,7 @@ import com.google.gson.JsonParser;
 import com.ibm.watson.developer_cloud.language_translator.v3.LanguageTranslator;
 import com.ibm.watson.developer_cloud.language_translator.v3.model.TranslateOptions;
 import com.ibm.watson.developer_cloud.language_translator.v3.model.TranslationResult;
-import com.ibm.watson.developer_cloud.service.security.IamOptions;
+
 
 public class Traductor
 {
