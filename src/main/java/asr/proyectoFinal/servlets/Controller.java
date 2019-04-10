@@ -21,6 +21,7 @@ import javax.servlet.http.HttpServletResponse;
 import asr.proyectoFinal.dao.CloudantPalabraStore;
 import asr.proyectoFinal.dominio.Palabra;
 import asr.proyectoFinal.services.Traductor;
+import asr.proyectoFinal.services.Text2Speech;
 
 /**
  * Servlet implementation class Controller
@@ -48,7 +49,7 @@ public class Controller extends HttpServlet {
 			case "/insertar":
 				Palabra palabra = new Palabra();
 				String parametro = request.getParameter("palabra");
-
+				int val;
 				if(parametro==null)
 				{
 					out.println("usage: /insertar?palabra=palabra_a_traducir");
@@ -62,6 +63,7 @@ public class Controller extends HttpServlet {
 					else
 					{
 						parametro = Traductor.translate(parametro, "es", "en", false);
+						val = Text2Speech.toSpeech(palabra);
 						palabra.setName(parametro);
 						store.persist(palabra);
 					    out.println(String.format("Almacenada la palabra: %s", palabra.getName()));			    	  
