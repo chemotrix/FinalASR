@@ -5,6 +5,7 @@ import com.google.gson.JsonParser;
 import com.ibm.watson.developer_cloud.language_translator.v3.LanguageTranslator;
 import com.ibm.watson.developer_cloud.language_translator.v3.model.TranslateOptions;
 import com.ibm.watson.developer_cloud.language_translator.v3.model.TranslationResult;
+import com.ibm.watson.developer_cloud.service.security.IamOptions;
 
 
 public class Traductor
@@ -23,7 +24,7 @@ public class Traductor
 
 		//LanguageTranslator languageTranslator = new LanguageTranslator("2019-04-09");
 		//languageTranslator.setUsernameAndPassword("f9517b48-edbb-4d41-a984-9333637a96bb","vdMRqsy1jOFV");
-		LanguageTranslator service = new LanguageTranslator();
+		LanguageTranslator service = new LanguageTranslator("2019-04-09");
 
 		IamOptions iamOptions = new IamOptions.Builder()
 			.apiKey("BTMk7ooExBVcjNlCdzWN91RY1iPoK8gcD3YXiHOSJFK7")
