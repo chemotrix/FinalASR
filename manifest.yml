@@ -1,0 +1,11 @@
+---
+applications:
+- name: FinalASR
+  random-route: false
+  path: target/FinalASR.war
+  memory: 640M
+  instances: 1
+  host: FinalASR
+  domain: eu-gb.mybluemix.net
+  services:
+  - asrDCBCloudantNoSQL
