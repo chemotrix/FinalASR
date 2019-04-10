@@ -12,7 +12,7 @@
 <p>Opciones sobre la base de datos Cloudant versión 2019:</p>
 <ul>
 <li><a href="listar">Listar</a></li>
-<li><a href="insertar?palabra=hola">Insertar</a></li>
+<li><a href="insertar?palabra=casa">Insertar</a></li>
 </ul>
 </body>
 </html>
