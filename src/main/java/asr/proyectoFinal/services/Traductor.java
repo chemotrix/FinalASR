@@ -21,10 +21,16 @@ public class Traductor
 		else
 			return translate(translate(palabra,sourceModel,"en",conversational),"en",destModel,conversational); //translate to english, then to dest
 
-		LanguageTranslator languageTranslator = new LanguageTranslator("2019-04-09");
+		//LanguageTranslator languageTranslator = new LanguageTranslator("2019-04-09");
 		//languageTranslator.setUsernameAndPassword("f9517b48-edbb-4d41-a984-9333637a96bb","vdMRqsy1jOFV");
-		languageTranslator.setUsernameAndPassword("8d3dec14-ff11-4221-b79d-a4487887455e","iwPMjuJBoKGNbM7ffDA81KoZYKl2nYN6oNSO2OllRnHE");
+		LanguageTranslator service = new LanguageTranslator();
 
+		IamOptions iamOptions = new IamOptions.Builder()
+			.apiKey("BTMk7ooExBVcjNlCdzWN91RY1iPoK8gcD3YXiHOSJFK7")
+			.build();
+
+		service.setIamCredentials(iamOptions);
+		
 		languageTranslator.setEndPoint("https://gateway.watsonplatform.net/language-translator/api");
 		
 		TranslateOptions translateOptions = new
