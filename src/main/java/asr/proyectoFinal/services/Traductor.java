@@ -39,7 +39,7 @@ public class Traductor
 		 .modelId(model)
 		 .build();
 
-		TranslationResult translationResult = languageTranslator.translate(translateOptions).execute();
+		TranslationResult translationResult = service.translate(translateOptions).execute();
 		
 		System.out.println(translationResult);
 
