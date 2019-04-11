@@ -29,15 +29,15 @@ public class Traductor
 			LanguageTranslator service = new LanguageTranslator("2019-04-09");
 	
 			IamOptions iamOptions = new IamOptions.Builder()
-				.apiKey("BTMk7ooExBVcjNlCdzWN91RY1iPoK8gcD3YXiHOSJFK7")
+				.apiKey("G9wJTWrKgssyVKv_d9Gbx8H5yi80qV-dnm7L6rqw1uMx")
 				.build();
 	
 			service.setIamCredentials(iamOptions);
 			
-			service.setEndPoint("https://gateway.watsonplatform.net/language-translator/api");
+			service.setEndPoint("https://gateway-lon.watsonplatform.net/language-translator/api");
 			
-			TranslateOptions translateOptions = new
-			TranslateOptions.Builder()
+			TranslateOptions translateOptions = new 
+			TranslateOptions.Builder() 
 			 .addText(palabra)
 			 .modelId(model)
 			 .build();
@@ -56,6 +56,8 @@ public class Traductor
 			traduccionPrimera = traducciones.get(0).getAsJsonObject().get("translation").getAsString();
 		} catch (Exception e) {
 			traduccionPrimera = "ERROR";
+			System.out.println(">>>>>><<<<<<");
+			e.printStackTrace();
 			// TODO: handle exception
 		}
 		return traduccionPrimera;
