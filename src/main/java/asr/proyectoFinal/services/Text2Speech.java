@@ -12,6 +12,7 @@ import com.ibm.watson.developer_cloud.text_to_speech.v1.util.WaveUtils;
 
 public class Text2Speech {
 	public static int toSpeech(String palabra) throws IOException {
+		System.out.println("DentroFinal");
 		IamOptions options = new IamOptions.Builder()
 				.apiKey("U67NKpgcFqf42ouUUcElJ5fVmWMgKemN44YSa3lPCKfr")
 				.build();
@@ -45,7 +46,8 @@ public class Text2Speech {
 			out.close();
 			in.close();
 			inputStream.close();
-
+			System.out.println(out.toString());
+			System.out.println("DentroFinal");
 			// Invoke a Text to Speech method
 		} catch (NotFoundException e) {
 

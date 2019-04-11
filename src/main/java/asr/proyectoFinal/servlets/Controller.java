@@ -26,7 +26,7 @@ import asr.proyectoFinal.services.Text2Speech;
 /**
  * Servlet implementation class Controller
  */
-@WebServlet(urlPatterns = {"/listar", "/insertar", "/hablar", "/textToSpeech"})
+@WebServlet(urlPatterns = {"/listar", "/insertar", "/hablar", "/texttospeech"})
 public class Controller extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -70,8 +70,10 @@ public class Controller extends HttpServlet {
 				}
 				break;
 				
-			case "/textToSpeech":
+			case "/texttospeech":
+				System.out.println("Antes");
 				val = Text2Speech.toSpeech("Hola Mundo");
+				System.out.println("Despues");
 				break;
 		}
 		out.println("</html>");
