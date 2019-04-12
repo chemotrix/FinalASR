@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -7,13 +7,18 @@
 <title>Proyecto ASR new...</title>
 </head>
 <body>
-<h1>Ejemplo de Proyecto de ASR con Cloudant ahora con DevOps</h1>
-<hr />
-<p>Opciones sobre la base de datos Cloudant versión 2019:</p>
-<ul>
-<li><a href="listar">Listar</a></li>
-<li><a href="insertar?palabra=casa">Insertar</a></li>
-<li><a href="texttospeech?palabra=hola">TextToSpeech</a></li>
-</ul>
+	<h1>Ejemplo de Proyecto de ASR con Cloudant ahora con DevOps</h1>
+	<hr />
+	<p>Opciones sobre la base de datos Cloudant versiÃ³n 2019:</p>
+	<ul>
+		<li><a href="listar">Listar</a></li>
+		<li><a href="insertar?palabra=casa">Insertar</a></li>
+		<li><a href="texttospeech?frase=hola">TextToSpeech</a></li>
+	</ul>
+
+	<form method="post" action="/FinalASR/texttospeech">
+		Texto a reproducir <input name="frase" type="text"> <br>
+		<input type="submit" value="Enviar">
+	</form>
 </body>
 </html>
