@@ -1,24 +1,165 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+<%@ page import="java.util.Date"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
+<html lang="zxx" class="no-js">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Proyecto ASR new...</title>
+<!-- Mobile Specific Meta -->
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<!-- Favicon-->
+<link rel="shortcut icon" href="img/fav.png">
+<!-- Author Meta -->
+<meta name="author" content="colorlib">
+<!-- Meta Description -->
+<meta name="description" content="">
+<!-- Meta Keyword -->
+<meta name="keywords" content="">
+<!-- meta character set -->
+<meta charset="UTF-8">
+<!-- Site Title -->
+<title>Personal</title>
+
+<link
+	href="https://fonts.googleapis.com/css?family=Poppins:100,200,400,300,500,600,700"
+	rel="stylesheet">
+<!--
+			CSS
+			============================================= -->
+<link rel="stylesheet" href="css/linearicons.css">
+<link rel="stylesheet" href="css/font-awesome.min.css">
+<link rel="stylesheet" href="css/bootstrap.css">
+<link rel="stylesheet" href="css/magnific-popup.css">
+<link rel="stylesheet" href="css/jquery-ui.css">
+<link rel="stylesheet" href="css/nice-select.css">
+<link rel="stylesheet" href="css/animate.min.css">
+<link rel="stylesheet" href="css/owl.carousel.css">
+<link rel="stylesheet" href="css/main.css">
 </head>
 <body>
-	<h1>Ejemplo de Proyecto de ASR con Cloudant ahora con DevOps</h1>
-	<hr />
-	<p>Opciones sobre la base de datos Cloudant versión 2019:</p>
-	<ul>
-		<li><a href="listar">Listar</a></li>
-		<li><a href="insertar?palabra=casa">Insertar</a></li>
-		<li><a href="texttospeech?frase=hola">TextToSpeech</a></li>
-	</ul>
+	<header id="header">
+	<div class="container main-menu">
+		<div class="row align-items-center justify-content-between d-flex">
+			<div id="logo">
+				<a href="index.html"><img src="img/logo.png" alt="" title="" /></a>
+			</div>
+			<nav id="nav-menu-container"> </nav>
+			<!-- #nav-menu-container -->
+		</div>
+	</div>
+	</header>
+	<!-- #header -->
 
-	<form method="post" action="/FinalASR/texttospeech">
-		Texto a reproducir <input name="frase" type="text"> <br>
-		<input type="submit" value="Enviar">
-	</form>
+	<!-- start banner Area -->
+	<section class="home-about-area pt-120">
+	<div class="container">
+		<div class="row align-items-center justify-content-between">
+			<div class="col-lg-12 col-md-12 home-about-left">
+				<h1>Practica Final - Chema & Carlos</h1>
+				<hr />
+				Hora actual:
+				<%=new Date()%>
+				<p>Opciones sobre la base de datos Cloudant versión 2019:</p>
+				<ul>
+					<li><a href="listar">Listar</a></li>
+				</ul>
+				<form method="post" action="/FinalASR/insertar">
+					Texto a insertar <input name="palabra" type="text"> <br>
+					<input type="submit" value="Enviar">
+				</form>
+				<br> <br>
+				<form method="post" action="/FinalASR/texttospeech">
+					Texto a reproducir <input name="frase" type="text"> <br>
+					<input type="submit" value="Enviar">
+				</form>
+			</div>
+		</div>
+	</div>
+	</section>
+	<!-- End brands Area -->
+
+	<!-- start footer Area -->
+	<footer class="footer-area section-gap">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-5 col-md-6 col-sm-6">
+				<div class="single-footer-widget">
+					<h4>About Me</h4>
+					<p>We have tested a number of registry fix and clean utilities
+						and present our top 3 list on our site for your convenience.</p>
+					<p class="footer-text">
+						<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+						Copyright &copy;
+						<script>
+							document.write(new Date().getFullYear());
+						</script>
+						All rights reserved | This template is made with <i
+							class="fa fa-heart-o" aria-hidden="true"></i> by <a
+							href="https://colorlib.com" target="_blank">Colorlib</a>
+						<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+					</p>
+				</div>
+			</div>
+			<div class="col-lg-5 col-md-6 col-sm-6">
+				<div class="single-footer-widget">
+					<h4>Newsletter</h4>
+					<p>Stay updated with our latest trends</p>
+					<div class="" id="mc_embed_signup">
+						<form target="_blank"
+							action="https://spondonit.us12.list-manage.com/subscribe/post?u=1462626880ade1ac87bd9c93a&amp;id=92a4423d01"
+							method="get">
+							<div class="input-group">
+								<input type="text" class="form-control" name="EMAIL"
+									placeholder="Enter Email Address"
+									onfocus="this.placeholder = ''"
+									onblur="this.placeholder = 'Enter Email Address '" required=""
+									type="email">
+								<div class="input-group-btn">
+									<button class="btn btn-default" type="submit">
+										<span class="lnr lnr-arrow-right"></span>
+									</button>
+								</div>
+								<div class="info"></div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-2 col-md-6 col-sm-6 social-widget">
+				<div class="single-footer-widget">
+					<h4>Follow Me</h4>
+					<p>Let us be social</p>
+					<div class="footer-social d-flex align-items-center">
+						<a href="#"><i class="fa fa-facebook"></i></a> <a href="#"><i
+							class="fa fa-twitter"></i></a> <a href="#"><i
+							class="fa fa-dribbble"></i></a> <a href="#"><i
+							class="fa fa-behance"></i></a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	</footer>
+	<!-- End footer Area -->
+
+	<script src="js/vendor/jquery-2.2.4.min.js"></script>
+	<script src="js/popper.min.js"></script>
+	<script src="js/vendor/bootstrap.min.js"></script>
+	<script
+		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBhOdIF3Y9382fqJYt5I_sswSrEw5eihAA"></script>
+	<script src="js/easing.min.js"></script>
+	<script src="js/hoverIntent.js"></script>
+	<script src="js/superfish.min.js"></script>
+	<script src="js/jquery.ajaxchimp.min.js"></script>
+	<script src="js/jquery.magnific-popup.min.js"></script>
+	<script src="js/jquery.tabs.min.js"></script>
+	<script src="js/jquery.nice-select.min.js"></script>
+	<script src="js/isotope.pkgd.min.js"></script>
+	<script src="js/waypoints.min.js"></script>
+	<script src="js/jquery.counterup.min.js"></script>
+	<script src="js/simple-skillbar.js"></script>
+	<script src="js/owl.carousel.min.js"></script>
+	<script src="js/mail-script.js"></script>
+	<script src="js/main.js"></script>
 </body>
 </html>
