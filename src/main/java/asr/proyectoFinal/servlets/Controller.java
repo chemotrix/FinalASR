@@ -14,7 +14,10 @@ import java.io.PrintWriter;
 import java.nio.Buffer;
 import java.nio.file.Files;
 import java.util.List;
+import java.util.Map;
 
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -28,12 +31,13 @@ import com.ibm.watson.developer_cloud.text_to_speech.v1.util.WaveUtils;
 import asr.proyectoFinal.dao.CloudantPalabraStore;
 import asr.proyectoFinal.dominio.Palabra;
 import asr.proyectoFinal.services.Traductor;
+import asr.proyectoFinal.services.ScrapTweets;
 import asr.proyectoFinal.services.Text2Speech;
 
 /**
  * Servlet implementation class Controller
  */
-@WebServlet(urlPatterns = {"/listar", "/insertar", "/hablar", "/texttospeech"})
+@WebServlet(urlPatterns = {"/listar", "/insertar", "/hablar", "/texttospeech","/getTweets"})
 public class Controller extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static Logger logger = Logger.getLogger(Controller.class.getName());
@@ -41,51 +45,73 @@ public class Controller extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
 	{
-		PrintWriter out = null;
+		ServletContext sc = this.getServletContext();
+		RequestDispatcher rd = sc.getRequestDispatcher("/info.jsp");
+
+		//PrintWriter out = null;
 		OutputStream outstream = null;
 		
 		CloudantPalabraStore store = new CloudantPalabraStore();
-		System.out.println(request.getServletPath());
+		//System.out.println(request.getServletPath());
 		
 		
 		switch(request.getServletPath())
 		{
+			case "/getTweets":
+				String getTweets = "True";
+				String username = request.getParameter("username");
+				if(username==null) 
+					request.setAttribute("usernameNull", "True");
+				Map sctw = ScrapTweets.get_tweets(username);
+				//System.out.println(sctw);
+				request.setAttribute("sctw", sctw);
+				rd.forward(request, response);
+				break;
 			case "/listar":
-				out = response.getWriter();
-				out.println("<html><head><meta charset=\"UTF-8\"></head><body>");
-				if(store.getDB() == null)
-					  out.println("No hay DB");
-				else
-					out.println("Palabras en la BD Cloudant:<br />" + store.getAll());
-				out.println("Hola!!</html>");
-				
+				//out = response.getWriter();
+				//out.println("<html><head><meta charset=\"UTF-8\"></head><body>");
+				String listar = "True";
+				if(store.getDB() != null)
+					/*
+					 * out.println("Palabras en la BD Cloudant:<br />" + store.getAll());
+					out.println("Hola!!</html>"); */
+					listar = "True";
+					request.setAttribute("cloudant", store.getAll());
+					/*else
+						out.println("No hay DB");*/					
+				request.setAttribute("listar", listar);
 				break;
 				
 			case "/insertar":
-				out = response.getWriter();
-				out.println("<html><head><meta charset=\"UTF-8\"></head><body>");
+				//out = response.getWriter();
+				//out.println("<html><head><meta charset=\"UTF-8\"></head><body>");
 				Palabra palabra = new Palabra();
 				String parametro = request.getParameter("palabra");
-				
+				request.setAttribute("Palabra", palabra);
+				String insertar = "True";
 				if(parametro==null)
 				{
-					out.println("usage: /insertar?palabra=palabra_a_traducir");
+					//out.println("usage: /insertar?palabra=palabra_a_traducir");
+					request.setAttribute("usage", "usage: /insertar?palabra=palabra_a_traducir");
 				}
 				else
 				{
 					if(store.getDB() == null) 
 					{
-						out.println(String.format("Palabra: %s", palabra));
+						request.setAttribute("Palabra", palabra);
+						//out.println(String.format("Palabra: %s", palabra));
 					}
 					else
 					{
+						request.setAttribute("insertarSuccess", String.format("Almacenada la palabra: %s", palabra.getName()));
 						parametro = Traductor.translate(parametro, "es", "en", false);
 						palabra.setName(parametro);
 						store.persist(palabra);
-					    out.println(String.format("Almacenada la palabra: %s", palabra.getName()));			    	  
+						//out.println(String.format("Almacenada la palabra-----: %s", palabra.getName()));			    	  
 					}
 				}
-				out.println("Hola!!</html>");
+				//out.println("asds`dksapkdsdaspdaspdsada</html>");
+				rd.forward(request, response);
 				break;
 				
 			case "/texttospeech":
@@ -94,7 +120,7 @@ public class Controller extends HttpServlet {
 		        
 				if(frase==null)
 				{
-					out.println("usage: /text2speech?frase=frase");
+					//out.println("usage: /text2speech?frase=frase");
 				}
 				else
 				{
@@ -127,7 +153,7 @@ public class Controller extends HttpServlet {
 						response.sendError(HttpServletResponse.SC_BAD_REQUEST, e.getMessage());
 					} finally {
 					    close(in);
-					    close(out);
+					    close(outstream);
 					}
 					
 				}
@@ -194,7 +220,7 @@ public class Controller extends HttpServlet {
 					    out.println(String.format("Almacenada la palabra: %s", palabra.getName()));			    	  
 					}
 				}
-				out.println("Hola!!</html>");
+				out.println("Ho</html>");
 				break;
 				
 			case "/texttospeech":
