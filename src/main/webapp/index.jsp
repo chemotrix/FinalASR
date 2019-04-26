@@ -18,7 +18,7 @@
 <!-- meta character set -->
 <meta charset="UTF-8">
 <!-- Site Title -->
-<title>PRACTICA FINAL - Microservicios</title>
+<title>PRACTICA FINAL - TweetsAnalyzer</title>
 
 <link
 	href="https://fonts.googleapis.com/css?family=Poppins:100,200,400,300,500,600,700"
@@ -36,12 +36,18 @@
 <link rel="stylesheet" href="css/owl.carousel.css">
 <link rel="stylesheet" href="css/main.css">
 </head>
-<body>
-	<header id="header">
+<body style="display: block;">
+	<button type="button" id="mobile-nav-toggle">
+		<i class="lnr lnr-menu"></i>
+	</button>
+	<button type="button" id="mobile-nav-toggle">
+		<i class="lnr lnr-menu"></i>
+	</button>
+	<header id="header" class="">
 	<div class="container main-menu">
 		<div class="row align-items-center justify-content-between d-flex">
 			<div id="logo">
-				<a href="index.html"><img src="img/logo.png" alt="" title="" /></a>
+				<a href="/FinalASR"><img src="img/logo.png" alt="" title=""></a>
 			</div>
 			<nav id="nav-menu-container"> </nav>
 			<!-- #nav-menu-container -->
@@ -51,50 +57,71 @@
 	<!-- #header -->
 
 	<!-- start banner Area -->
-	<section class="home-about-area pt-120">
+	<section class="home-about-area" style="padding-top: 100px;">
+
 	<div class="container">
 		<div class="row align-items-center justify-content-between">
 			<div class="col-lg-12 col-md-12 home-about-left">
-				<h1>Practica Final - Chema & Carlos</h1>
-				<hr />
-				Hora actual:
-				<%=new Date()%>
-				<p>Opciones sobre la base de datos Cloudant versión 2019:</p>
-				<ul>
-					<li><a href="listar">Listar</a></li>
-				</ul>
-				<form method="post" action="/FinalASR/insertar">
-					Texto a insertar <input name="palabra" type="text"> <br>
-					<input type="submit" value="Enviar">
+
+				<h1 class="display-1">TweetsAnalyzer</h1>
+
+
+				<hr>
+
+				<form class="form-inline" method="post" action="/FinalASR/getTweets">
+
+					<div class="container" style="">
+
+						<div class="row">
+							<div class="col col-lg-3">
+								<label class="h3" style="margin-top: 13px;">Usuario de
+									Twitter</label>
+							</div>
+							<div class="col col-lg-6">
+								<input type="text" name="username"
+									class="form-control form-control-lg" id="colFormLabelLg"
+									placeholder="Insertar aqui" style="width: inherit;">
+							</div>
+							<div class="col col-lg-3">
+								<input class="btn btn-primary btn-lg active" type="submit"
+									value="Enviar">
+							</div>
+						</div>
+
+					</div>
+
 				</form>
 				<br> <br>
-				<form method="post" action="/FinalASR/texttospeech">
-					Texto a reproducir <input name="frase" type="text"> <br>
-					<input type="submit" value="Enviar">
-				</form>
+
 			</div>
 		</div>
-		<br>
-		<br>
-		<br>
-		<br>
+		<br> <br> <br> <br>
 	</div>
 	</section>
 	<!-- End brands Area -->
 
+
+
+
 	<!-- start footer Area -->
-	<footer class="footer-area">
+	<footer style="
+    position: fixed;
+    height: 100px;
+    background-color: black;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    margin-bottom: 0px;
+">
 	<div class="container">
 		<div class="row">
 			<div class="col-lg-12 col-md-12 col-sm-12">
 				<div class="single-footer-widget">
-					<br>
-					<br>
-					<h3 style="color:#fff;">ARQUITECTURA DE SERVICIOS EN RED</h3>
-					<h4>&#x24B8; Carlos Arranz &amp; Chema Rodriguez</h4>
+					<br> <br>
+					<h3 style="color: #fff;">ARQUITECTURA DE SERVICIOS EN RED</h3>
+					<h4>&copy; Chema Rodriguez  &amp; Carlos Arranz</h4>
 				</div>
-				<br>
-				<br>
+				<br> <br>
 			</div>
 
 		</div>
@@ -121,5 +148,13 @@
 	<script src="js/owl.carousel.min.js"></script>
 	<script src="js/mail-script.js"></script>
 	<script src="js/main.js"></script>
+
+	<nav id="mobile-nav"> </nav>
+	<div id="mobile-body-overly"></div>
+
+
+	<nav id="mobile-nav"> </nav>
+	<div id="mobile-body-overly"></div>
 </body>
+
 </html>

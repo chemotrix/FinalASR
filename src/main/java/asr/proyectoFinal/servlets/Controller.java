@@ -45,122 +45,44 @@ public class Controller extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
 	{
-		ServletContext sc = this.getServletContext();
-		RequestDispatcher rd = sc.getRequestDispatcher("/info.jsp");
-
-		//PrintWriter out = null;
-		OutputStream outstream = null;
+		this.doPost(request,response);
 		
+	}
+	
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		CloudantPalabraStore store = new CloudantPalabraStore();
 		//System.out.println(request.getServletPath());
 		
 		
 		switch(request.getServletPath())
 		{
-			case "/getTweets":
-				String getTweets = "True";
-				String username = request.getParameter("username");
-				if(username==null) 
-					request.setAttribute("usernameNull", "True");
-				Map sctw = ScrapTweets.get_tweets(username);
-				//System.out.println(sctw);
-				request.setAttribute("sctw", sctw);
-				rd.forward(request, response);
-				break;
-			case "/listar":
-				//out = response.getWriter();
-				//out.println("<html><head><meta charset=\"UTF-8\"></head><body>");
-				String listar = "True";
-				if(store.getDB() != null)
-					/*
-					 * out.println("Palabras en la BD Cloudant:<br />" + store.getAll());
-					out.println("Hola!!</html>"); */
-					listar = "True";
-					request.setAttribute("cloudant", store.getAll());
-					/*else
-						out.println("No hay DB");*/					
-				request.setAttribute("listar", listar);
-				break;
-				
-			case "/insertar":
-				//out = response.getWriter();
-				//out.println("<html><head><meta charset=\"UTF-8\"></head><body>");
-				Palabra palabra = new Palabra();
-				String parametro = request.getParameter("palabra");
-				request.setAttribute("Palabra", palabra);
-				String insertar = "True";
-				if(parametro==null)
-				{
-					//out.println("usage: /insertar?palabra=palabra_a_traducir");
-					request.setAttribute("usage", "usage: /insertar?palabra=palabra_a_traducir");
-				}
-				else
-				{
-					if(store.getDB() == null) 
-					{
-						request.setAttribute("Palabra", palabra);
-						//out.println(String.format("Palabra: %s", palabra));
-					}
-					else
-					{
-						request.setAttribute("insertarSuccess", String.format("Almacenada la palabra: %s", palabra.getName()));
-						parametro = Traductor.translate(parametro, "es", "en", false);
-						palabra.setName(parametro);
-						store.persist(palabra);
-						//out.println(String.format("Almacenada la palabra-----: %s", palabra.getName()));			    	  
-					}
-				}
-				//out.println("asds`dksapkdsdaspdaspdsada</html>");
-				rd.forward(request, response);
-				break;
-				
-			case "/texttospeech":
-				
-				String frase = request.getParameter("frase");
-		        
-				if(frase==null)
-				{
-					//out.println("usage: /text2speech?frase=frase");
-				}
-				else
-				{
-					//boolean download = "true".equalsIgnoreCase(request.getParameter("download"));
-					Boolean download = true;
-					InputStream in = null;
-					try {
-				         
-				         
-				         in = Text2Speech.toSpeech(frase, new Voice(), "audio/wav");
-				         
-				         if (download) {
-				             response.setHeader("content-disposition",
-				                            "attachment; filename=transcript.wav");
-				         }
-
-				         outstream = response.getOutputStream();
-				         byte[] buffer = new byte[2048];
-				         int read;
-				         while ((read = in.read(buffer)) != -1) {
-				        	 outstream.write(buffer, 0, read);
-				         }
-				         
-				         
-				         
-					} catch (Exception e) {
-						
-						// Log something and return an error message
-						logger.log(Level.SEVERE, "got error: " + e.getMessage());
-						response.sendError(HttpServletResponse.SC_BAD_REQUEST, e.getMessage());
-					} finally {
-					    close(in);
-					    close(outstream);
-					}
-					
-				}
-				
-				break;
-		}
+		case "/getTweets":
+			request.setAttribute("tweet","true");
+			String username = request.getParameter("username");
+			request.setAttribute("username",username);
+			if(username==null) 
+				request.setAttribute("usernameNull", "True");
+			Map sctw = ScrapTweets.get_tweets(username);
+			//System.out.println(sctw);
+			request.setAttribute("sctw", sctw);
+			
+			break;
+		case "/listar":
+			String listar = "True";
+			if(store.getDB() != null)
+				listar = "True";
+				request.setAttribute("cloudant", store.getAll());
+				/*else
+					out.println("No hay DB");*/					
+			request.setAttribute("listar", listar);
+			break;
+			
 		
+		}
+		request.getRequestDispatcher("/info.jsp").forward(request, response);
 	}
 	
 	private void close(Closeable closeable) {
@@ -172,105 +94,99 @@ public class Controller extends HttpServlet {
 	        }
 	    }	      	   
 	}
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		PrintWriter out = null;
-		OutputStream outstream = null;
-		
-		CloudantPalabraStore store = new CloudantPalabraStore();
-		System.out.println(request.getServletPath());
-		
-		
-		switch(request.getServletPath())
-		{
-			case "/listar":
-				out = response.getWriter();
-				out.println("<html><head><meta charset=\"UTF-8\"></head><body>");
-				if(store.getDB() == null)
-					  out.println("No hay DB");
-				else
-					out.println("Palabras en la BD Cloudant:<br />" + store.getAll());
-				out.println("Hola!!</html>");
-				
-				break;
-				
-			case "/insertar":
-				out = response.getWriter();
-				out.println("<html><head><meta charset=\"UTF-8\"></head><body>");
-				Palabra palabra = new Palabra();
-				String parametro = request.getParameter("palabra");
-				
-				if(parametro==null)
-				{
-					out.println("usage: /insertar?palabra=palabra_a_traducir");
-				}
-				else
-				{
-					if(store.getDB() == null) 
-					{
-						out.println(String.format("Palabra: %s", palabra));
-					}
-					else
-					{
-						parametro = Traductor.translate(parametro, "es", "en", false);
-						palabra.setName(parametro);
-						store.persist(palabra);
-					    out.println(String.format("Almacenada la palabra: %s", palabra.getName()));			    	  
-					}
-				}
-				out.println("Ho</html>");
-				break;
-				
-			case "/texttospeech":
-				
-				String frase = request.getParameter("frase");
-		        
-				if(frase==null)
-				{
-					out.println("usage: /text2speech?frase=frase");
-				}
-				else
-				{
-					//boolean download = "true".equalsIgnoreCase(request.getParameter("download"));
-					Boolean download = true;
-					InputStream in = null;
-					try {
-				         
-				         
-				         in = Text2Speech.toSpeech(frase, new Voice(), "audio/wav");
-				         
-				         if (download) {
-				             response.setHeader("content-disposition",
-				                            "attachment; filename=transcript.wav");
-				         }
-
-				         outstream = response.getOutputStream();
-				         byte[] buffer = new byte[2048];
-				         int read;
-				         while ((read = in.read(buffer)) != -1) {
-				        	 outstream.write(buffer, 0, read);
-				         }
-				         
-				         
-				         
-					} catch (Exception e) {
-						
-						// Log something and return an error message
-						logger.log(Level.SEVERE, "got error: " + e.getMessage());
-						response.sendError(HttpServletResponse.SC_BAD_REQUEST, e.getMessage());
-					} finally {
-					    close(in);
-					    close(out);
-					}
-					
-				}
-				
-				break;
-		}
-		
-	}
-
 }
 
+
+
+
+
+
+
+
+
+/*
+ * 
+ * 
+ 
+case "/insertar":
+			//out = response.getWriter();
+			//out.println("<html><head><meta charset=\"UTF-8\"></head><body>");
+			Palabra palabra = new Palabra();
+			String parametro = request.getParameter("palabra");
+			request.setAttribute("Palabra", palabra);
+			String insertar = "True";
+			if(parametro==null)
+			{
+				//out.println("usage: /insertar?palabra=palabra_a_traducir");
+				request.setAttribute("usage", "usage: /insertar?palabra=palabra_a_traducir");
+			}
+			else
+			{
+				if(store.getDB() == null) 
+				{
+					request.setAttribute("Palabra", palabra);
+					//out.println(String.format("Palabra: %s", palabra));
+				}
+				else
+				{
+					request.setAttribute("insertarSuccess", String.format("Almacenada la palabra: %s", palabra.getName()));
+					parametro = Traductor.translate(parametro, "es", "en", false);
+					palabra.setName(parametro);
+					store.persist(palabra);
+					//out.println(String.format("Almacenada la palabra-----: %s", palabra.getName()));			    	  
+				}
+			}
+			//out.println("asds`dksapkdsdaspdaspdsada</html>");
+			rd.forward(request, response);
+			break;
+			
+		case "/texttospeech":
+			
+			String frase = request.getParameter("frase");
+	        
+			if(frase==null)
+			{
+				//out.println("usage: /text2speech?frase=frase");
+			}
+			else
+			{
+				//boolean download = "true".equalsIgnoreCase(request.getParameter("download"));
+				Boolean download = true;
+				InputStream in = null;
+				try {
+			         
+			         
+			         in = Text2Speech.toSpeech(frase, new Voice(), "audio/wav");
+			         
+			         if (download) {
+			             response.setHeader("content-disposition",
+			                            "attachment; filename=transcript.wav");
+			         }
+
+			         outstream = response.getOutputStream();
+			         byte[] buffer = new byte[2048];
+			         int read;
+			         while ((read = in.read(buffer)) != -1) {
+			        	 outstream.write(buffer, 0, read);
+			         }
+			         
+			         
+			         
+				} catch (Exception e) {
+					
+					// Log something and return an error message
+					logger.log(Level.SEVERE, "got error: " + e.getMessage());
+					response.sendError(HttpServletResponse.SC_BAD_REQUEST, e.getMessage());
+				} finally {
+				    close(in);
+				    close(outstream);
+				}
+				
+			}
+			
+			break;
+			
+			 
+			 
+ * 
+ * */
