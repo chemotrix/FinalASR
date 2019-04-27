@@ -49,7 +49,9 @@
 			<div id="logo">
 				<a href="/FinalASR"><img src="img/logo.png" alt="" title=""></a>
 			</div>
-			<nav id="nav-menu-container"> </nav>
+			<nav id="nav-menu-container">
+			<h1 class="display-1">TweetsAnalyzer</h1>
+			</nav>
 			<!-- #nav-menu-container -->
 		</div>
 	</div>
@@ -57,13 +59,12 @@
 	<!-- #header -->
 
 	<!-- start banner Area -->
-	<section class="home-about-area" style="padding-top: 100px;">
+	<section class="home-about-area" style="padding-top: 180px;">
 
 	<div class="container">
 		<div class="row align-items-center justify-content-between">
 			<div class="col-lg-12 col-md-12 home-about-left">
 
-				<h1 class="display-1">TweetsAnalyzer</h1>
 
 
 				<hr>
@@ -104,7 +105,8 @@
 
 
 	<!-- start footer Area -->
-	<footer style="
+	<footer
+		style="
     position: fixed;
     height: 100px;
     background-color: black;
@@ -119,7 +121,7 @@
 				<div class="single-footer-widget">
 					<br> <br>
 					<h3 style="color: #fff;">ARQUITECTURA DE SERVICIOS EN RED</h3>
-					<h4>&copy; Chema Rodriguez  &amp; Carlos Arranz</h4>
+					<h4>&copy; Chema Rodriguez &amp; Carlos Arranz</h4>
 				</div>
 				<br> <br>
 			</div>

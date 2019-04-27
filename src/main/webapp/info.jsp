@@ -49,7 +49,9 @@
 			<div id="logo">
 				<a href="/FinalASR"><img src="img/logo.png" alt="" title=""></a>
 			</div>
-			<nav id="nav-menu-container"> </nav>
+			<nav id="nav-menu-container">
+			<h1 class="display-1">TweetsAnalyzer</h1>
+			</nav>
 			<!-- #nav-menu-container -->
 		</div>
 	</div>
@@ -59,13 +61,11 @@
 
 
 	<!-- start banner Area -->
-	<section class="home-about-area" style="padding-top: 100px;">
+	<section class="home-about-area" style="padding-top: 180px;">
 
 	<div class="container">
 		<div class="row align-items-center justify-content-between">
 			<div class="col-lg-12 col-md-12 home-about-left">
-
-				<h1 class="display-1">TweetsAnalyzer</h1>
 
 
 				<hr>
@@ -103,17 +103,31 @@
 	<%
 		String tweet = (String) request.getAttribute("tweet");
 		String username = (String) request.getAttribute("username");
+		String id0 = (String) request.getAttribute("id0");
+		String tweet0 = (String) request.getAttribute("tweet0");
 		if (tweet != null) {
 	%>
 
 
 
-	<div class="container">
-		<p class="text-center display-3"><%=username%></p>
+	<div class="container" style="padding-bottom: 150px;">
+		<div class="row" style="text-align: center;">
+			<div class="col-6">
+				<p class="text-center h2"
+					style="margin-top: 80px; margin-left: 100px;">
+					@<%=username%></p>
+			</div>
+			<div class="col-6">
+				<img src="<%="https://avatars.io/twitter/" + username%>"
+					alt="Smiley face" height="200" width="200">
+			</div>
+		</div>
+
 		<div class="row vertical-divider" style="margin-top: 30px">
 
 			<div class="col-4">
 				<p class="h2">Personality Insight</p>
+				<br>
 				<p>Lorem Ipsum is simply dummy text of the printing and
 					typesetting industry. Lorem Ipsum has been the industry's standard
 					dummy text ever since the 1500s, when an unknown printer took a
@@ -127,6 +141,7 @@
 			</div>
 			<div class="col-4">
 				<p class="h2">Tone Analyzer</p>
+				<br>
 				<p>Lorem Ipsum is simply dummy text of the printing and
 					typesetting industry. Lorem Ipsum has been the industry's standard
 					dummy text ever since the 1500s, when an unknown printer took a
@@ -139,18 +154,17 @@
 					Lorem Ipsum.</p>
 			</div>
 			<div class="col-4">
-				<p class="h2">Tweets</p>
-				<p>Lorem Ipsum is simply dummy text of the printing and
-					typesetting industry. Lorem Ipsum has been the industry's standard
-					dummy text ever since the 1500s, when an unknown printer took a
-					galley of type and scrambled it to make a type specimen book. It
-					has survived not only five centuries, but also the leap into
-					electronic typesetting, remaining essentially unchanged. It was
-					popularised in the 1960s with the release of Letraset sheets
-					containing Lorem Ipsum passages, and more recently with desktop
-					publishing software like Aldus PageMaker including versions of
-					Lorem Ipsum.</p>
-
+				<p class="h2">Últimos Tweets</p>
+				<br>
+				<%
+					for (int i = 0; i < 10; i++) {
+				%>
+				<!-- p><=request.getAttribute("id"+i)%></p-->
+				<p><%=request.getAttribute("tweet" + i)%></p>
+				<hr>
+				<%
+					}
+				%>
 			</div>
 		</div>
 	</div>
@@ -167,7 +181,16 @@
 
 
 
+	<script type="text/javascript">
+		function GetImage() {
 
+			var txtBox = document.getElementById("twit");
+			var imgTwitter = document.getElementById("imgTwitter");
+			imgTwitter.src = "http://api.twitter.com/1/users/profile_image/"
+					+ txtBox.value;
+
+		}
+	</script>
 	<!-- start footer Area -->
 	<footer class=""
 		style="
@@ -194,6 +217,32 @@
 	</div>
 	</footer>
 	<!-- End footer Area -->
+
+
+	<style>
+.row.vertical-divider {
+	overflow: hidden;
+}
+
+.row.vertical-divider>div[class^="col-"] {
+	text-align: center;
+	padding-bottom: 100px;
+	margin-bottom: -100px;
+	border-left: 3px solid #397992a6;
+	border-right: 3px solid #397992a6;
+}
+
+.row.vertical-divider div[class^="col-"]:first-child {
+	border-left: none;
+}
+
+.row.vertical-divider div[class^="col-"]:last-child {
+	border-right: none;
+}
+</style>
+
+
+
 
 	<script src="js/vendor/jquery-2.2.4.min.js"></script>
 	<script src="js/popper.min.js"></script>
@@ -225,24 +274,3 @@
 
 </html>
 
-<style>
-.row.vertical-divider {
-	overflow: hidden;
-}
-
-.row.vertical-divider>div[class^="col-"] {
-	text-align: center;
-	padding-bottom: 100px;
-	margin-bottom: -100px;
-	border-left: 3px solid #397992a6;
-	border-right: 3px solid #397992a6;
-}
-
-.row.vertical-divider div[class^="col-"]:first-child {
-	border-left: none;
-}
-
-.row.vertical-divider div[class^="col-"]:last-child {
-	border-right: none;
-}
-</style>

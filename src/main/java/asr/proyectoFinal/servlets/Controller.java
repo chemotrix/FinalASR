@@ -65,9 +65,13 @@ public class Controller extends HttpServlet {
 			request.setAttribute("username",username);
 			if(username==null) 
 				request.setAttribute("usernameNull", "True");
-			Map sctw = ScrapTweets.get_tweets(username);
-			//System.out.println(sctw);
-			request.setAttribute("sctw", sctw);
+			Map<String, String> sctw = ScrapTweets.get_tweets(username);
+			System.out.println(sctw);
+			for (Map.Entry<String, String> entry : sctw.entrySet()) {
+			    //System.out.println(entry.getKey() + "/" + entry.getValue());
+			    request.setAttribute(entry.getKey(), entry.getValue());
+			}
+			//request.setAttribute("sctw", sctw);
 			
 			break;
 		case "/listar":

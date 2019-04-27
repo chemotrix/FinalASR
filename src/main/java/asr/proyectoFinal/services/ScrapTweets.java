@@ -1,7 +1,14 @@
 package asr.proyectoFinal.services;
 
 import java.util.*;
+
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+
+import com.google.gson.Gson;
+
 import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
@@ -18,7 +25,6 @@ public class ScrapTweets {
 		String basicAuthPayload = "Basic " + Base64.getEncoder().encodeToString(usernameColonPassword.getBytes());
 
 		Map<String, String> nombreMap = new HashMap<String, String>();
-		nombreMap.put("hola", "quetal");
 
 		try {
 
@@ -32,7 +38,7 @@ public class ScrapTweets {
 
 			OutputStreamWriter wr = new OutputStreamWriter(con.getOutputStream());
 
-			String pet = "{\"user\":\""+NombreUsuario+"\"}";
+			String pet = "{\"user\":\"" + NombreUsuario + "\"}";
 
 			wr.write(pet);
 			wr.flush();
@@ -48,8 +54,11 @@ public class ScrapTweets {
 					content.append(System.lineSeparator());
 				}
 			}
-
 			System.out.println(content.toString());
+
+			nombreMap = convertToMap(nombreMap, content.toString());
+
+			// System.out.println(jsonObject.get("age"));
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -58,4 +67,37 @@ public class ScrapTweets {
 		return nombreMap;
 	}
 
+	private static Map<String, String> convertToMap(Map<String, String> nombreMap, String content) {
+		// TODO Auto-generated method stub
+		int num = 0;
+		int index = 0;
+		for (int i = 0; i < 10; i++) {
+			// GET ID USER
+			index = content.indexOf('"', num);
+			String idUser = content.substring(index + 1, content.indexOf('"', index + 2));
+			System.out.println(idUser);
+			num = content.indexOf('"', index + 2) + 1;
+			
+			//GET TWEET
+			index = content.indexOf('"', num);
+			String tweet = content.substring(index + 1, content.indexOf('"', index + 2));
+			System.out.println(tweet);
+			num = content.indexOf('"', index + 2) + 1;
+			
+			nombreMap.put("id"+i, idUser);
+			nombreMap.put("tweet"+i, tweet);
+		}
+
+		System.out.println(content.substring(index + 1, content.indexOf('"', index + 2)));
+		System.out.println(content.indexOf('"'));
+		System.out.println(content.charAt(content.indexOf('"') + 1));
+		//nombreMap.put("content", content);
+		return nombreMap;
+	}
+
+	public static Object readJsonSimpleDemo(String filename) throws Exception {
+		FileReader reader = new FileReader(filename);
+		JSONParser jsonParser = new JSONParser();
+		return jsonParser.parse(reader);
+	}
 }
