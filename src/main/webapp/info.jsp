@@ -75,17 +75,18 @@
 
 					<div class="container" style="">
 
-						<div class="row">
-							<div class="col-md-3">
+						<div class="row" style="text-align: center;">
+							<div class="col-md-3" style="padding-bottom: 10px;">
 								<label class="h3" style="margin-top: 13px;">Usuario de
 									Twitter</label>
 							</div>
-							<div class="col-md-7">
+							<div class="col-md-7" style="padding-bottom: 10px;">
 								<input type="text" name="username"
 									class="form-control form-control-lg" id="colFormLabelLg"
 									placeholder="Insertar aqui" style="width: inherit;">
 							</div>
-							<div class="col-md-2" style="text-align: center; width: 100%;">
+							<div class="col-md-2"
+								style="text-align: center; width: 100%; padding-bottom: 10px;">
 								<input class="btn btn-primary btn-lg active" type="submit"
 									style="width: 100%;" value="Enviar">
 							</div>
@@ -119,7 +120,8 @@
 		%>
 		<div class="row" style="text-align: center;">
 			<div class="col-md-6">
-				<p class="text-center h2" style="margin-top: 80px; font-size: 48px;">
+				<p class="text-center h2"
+					style="margin-top: 80px; font-size: 48px; margin-bottom: 100px;">
 					<a href="http://twitter.com/<%=username%>">@<%=username%></a>
 				</p>
 			</div>
@@ -141,8 +143,9 @@
 					style="font-size: 25px;">
 					Oops! Ese usuario no existe, quizá estes buscando analizar a <a
 						href="/getTweets?username=vox_es">Vox_es</a>
-</div></p>
-				
+				</div>
+				</p>
+
 			</div>
 		</div>
 		<%
