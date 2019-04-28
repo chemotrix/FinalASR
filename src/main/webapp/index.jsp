@@ -37,25 +37,23 @@
 <link rel="stylesheet" href="css/main.css">
 </head>
 <body style="display: block;">
-	<button type="button" id="mobile-nav-toggle">
-		<i class="lnr lnr-menu"></i>
-	</button>
-	<button type="button" id="mobile-nav-toggle">
-		<i class="lnr lnr-menu"></i>
-	</button>
+
 	<header id="header" class="">
 	<div class="container main-menu">
-		<div class="row align-items-center justify-content-between d-flex">
-			<div id="logo">
+		<div class="row">
+
+			<div class="col-md-4" id="logo">
 				<a href="/"><img src="img/logo.png" alt="" title=""></a>
 			</div>
-			<nav id="nav-menu-container">
-			</nav>
-			<h1 class="display-1">TweetsAnalyzer</h1>
+			<div class="col-md-4">
+				<h1 class="" style="font-size: 6vw; text-align: center;">TweetsAnalyzer</h1>
+			</div>
 			<!-- #nav-menu-container -->
 		</div>
 	</div>
 	</header>
+	<!-- #header -->
+
 	<!-- #header -->
 
 	<!-- start banner Area -->
@@ -74,18 +72,18 @@
 					<div class="container" style="">
 
 						<div class="row">
-							<div class="col col-lg-3">
+							<div class="col-md-3">
 								<label class="h3" style="margin-top: 13px;">Usuario de
 									Twitter</label>
 							</div>
-							<div class="col col-lg-6">
+							<div class="col-md-7">
 								<input type="text" name="username"
 									class="form-control form-control-lg" id="colFormLabelLg"
 									placeholder="Insertar aqui" style="width: inherit;">
 							</div>
-							<div class="col col-lg-3">
+							<div class="col-md-2" style="text-align: center; width: 100%;">
 								<input class="btn btn-primary btn-lg active" type="submit"
-									value="Enviar">
+									value="Enviar" style="width: 100%;">
 							</div>
 						</div>
 

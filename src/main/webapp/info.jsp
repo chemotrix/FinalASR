@@ -45,14 +45,14 @@
 	</button>
 	<header id="header" class="">
 	<div class="container main-menu">
-		<div class="row align-items-center justify-content-between d-flex">
-			<div id="logo">
+		<div class="row">
+
+			<div class="col-md-4" id="logo">
 				<a href="/"><img src="img/logo.png" alt="" title=""></a>
 			</div>
-			<nav id="nav-menu-container">
-			
-			</nav>
-			<h1 class="display-1">TweetsAnalyzer</h1>
+			<div class="col-md-4">
+				<h1 class="" style="font-size: 6vw; text-align: center;">TweetsAnalyzer</h1>
+			</div>
 			<!-- #nav-menu-container -->
 		</div>
 	</div>
@@ -62,7 +62,7 @@
 
 
 	<!-- start banner Area -->
-	<section class="home-about-area" style="padding-top: 180px;">
+	<section class="home-about-area" style="padding-top: 163px;">
 
 	<div class="container">
 		<div class="row align-items-center justify-content-between">
@@ -76,18 +76,18 @@
 					<div class="container" style="">
 
 						<div class="row">
-							<div class="col col-lg-3">
+							<div class="col-md-3">
 								<label class="h3" style="margin-top: 13px;">Usuario de
 									Twitter</label>
 							</div>
-							<div class="col col-lg-6">
+							<div class="col-md-7">
 								<input type="text" name="username"
 									class="form-control form-control-lg" id="colFormLabelLg"
 									placeholder="Insertar aqui" style="width: inherit;">
 							</div>
-							<div class="col col-lg-3">
+							<div class="col-md-2" style="text-align: center; width: 100%;">
 								<input class="btn btn-primary btn-lg active" type="submit"
-									value="Enviar">
+									style="width: 100%;" value="Enviar">
 							</div>
 						</div>
 
@@ -114,22 +114,42 @@
 
 
 
-
+		<%
+			if (request.getAttribute("map") != "true") {
+		%>
 		<div class="row" style="text-align: center;">
-			<div class="col-6">
-
-				<p class="text-center h2"
-					style="margin-top: 80px; margin-left: 123px; font-size: 6vh;">
+			<div class="col-md-6">
+				<p class="text-center h2" style="margin-top: 80px; font-size: 48px;">
 					<a href="http://twitter.com/<%=username%>">@<%=username%></a>
 				</p>
 			</div>
-			<div class="col-6">
+			<div class="col-md-6">
 				<img src="https://avatars.io/twitter/<%=username%>"
-					alt="Smiley face" height="200" width="200">
+					alt="https://avatars.io/twitter/<%=username%>"
+					class="rounded-circle border border-dark" height="200" width="200"
+					style="border: 3px solid #222222 !important;">
 			</div>
 		</div>
+		<%
+			} else {
+		%>
 
+		<div class="row" style="text-align: center;">
+			<div class="col-md-12">
+				<p class="text-center h2" style="margin-top: 80px; font-size: 48px;">
+				<div class="alert alert-danger" role="alert"
+					style="font-size: 25px;">
+					Oops! Ese usuario no existe, quizá estes buscando analizar a <a
+						href="/getTweets?username=vox_es">Vox_es</a>
+</div></p>
+				
+			</div>
+		</div>
+		<%
+			}
 
+				if (request.getAttribute("map") != "true") {
+		%>
 		<div class="row" style="margin-top: 30px">
 
 			<div class="container">
@@ -171,9 +191,9 @@
 					<ul class="timeline">
 						<%
 							for (int i = 0; i < 10; i++) {
-									String tweet_tmp = (String) request.getAttribute("tweet" + i);
-									String pic_tmp = (String) request.getAttribute("pic" + i);
-									if (i % 2 == 0) {
+										String tweet_tmp = (String) request.getAttribute("tweet" + i);
+										String pic_tmp = (String) request.getAttribute("pic" + i);
+										if (i % 2 == 0) {
 						%>
 						<li>
 							<div class="timeline-badge">
@@ -192,11 +212,11 @@
 								<div class="timeline-body">
 									<p><%=tweet_tmp%></p>
 									<%
-										if (pic_tmp != " "){
-											
-										
+										if (pic_tmp != " ") {
 									%>
-									<p><a href="http://<%=pic_tmp%>"><%=pic_tmp%></a></p>
+									<p>
+										<a href="http://<%=pic_tmp%>"><%=pic_tmp%></a>
+									</p>
 									<%
 										}
 									%>
@@ -223,13 +243,17 @@
 						</li>
 						<%
 							}
-								}
+									}
 						%>
 					</ul>
 				</div>
 				<hr>
 
 			</div>
+
+			<%
+				}
+			%>
 		</div>
 	</div>
 
@@ -258,7 +282,6 @@
 	<!-- start footer Area -->
 	<footer class=""
 		style="
-    position: fixed;
     height: 100px;
     background-color: black;
     bottom: 0px;
@@ -266,13 +289,14 @@
     right: 0px;
     margin-bottom: 0px;
 ">
-	<div class="container">
-		<div class="row">
-			<div class="col-lg-12 col-md-12 col-sm-12">
+	<div class="" style="background-color: black;">
+		<div class="container">
+			<div class="col-lg-12 col-md-12 col-sm-12"
+				style="background-color: black;">
 				<div class="single-footer-widget">
 					<br> <br>
 					<h3 style="color: #fff;">ARQUITECTURA DE SERVICIOS EN RED</h3>
-					<h4>&copy; Chema Rodriguez &amp; Carlos Arranz</h4>
+					<h4>© Chema Rodriguez &amp; Carlos Arranz</h4>
 				</div>
 				<br> <br>
 			</div>

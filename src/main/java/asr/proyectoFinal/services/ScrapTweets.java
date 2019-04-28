@@ -54,10 +54,8 @@ public class ScrapTweets {
 					content.append(System.lineSeparator());
 				}
 			}
-			System.out.println(content.toString());
 
 			nombreMap = convertToMap(nombreMap, content.toString());
-
 			// System.out.println(jsonObject.get("age"));
 
 		} catch (Exception e) {
@@ -74,23 +72,30 @@ public class ScrapTweets {
 		for (int i = 0; i < 10; i++) {
 			// GET ID USER
 			index = content.indexOf('"', num);
-			String idUser = content.substring(index + 1, content.indexOf('"', index + 2));
-			num = content.indexOf('"', index + 2) + 1;
+			if (index != -1) {
 
-			// GET TWEET
-			index = content.indexOf('"', num);
-			String tweet = content.substring(index + 1, content.indexOf('"', index + 2));
-			num = content.indexOf('"', index + 2) + 1;
+				String idUser = content.substring(index + 1, content.indexOf('"', index + 2));
+				num = content.indexOf('"', index + 2) + 1;
 
-			String pic = picTwit(tweet);
-			tweet = formatTweet(tweet);
+				// GET TWEET
+				index = content.indexOf('"', num);
+				String tweet = content.substring(index + 1, content.indexOf('"', index + 2));
+				num = content.indexOf('"', index + 2) + 1;
 
-			System.out.println(idUser);
-			System.out.println(tweet);
-			System.out.println(pic);
-			nombreMap.put("id" + i, idUser);
-			nombreMap.put("tweet" + i, tweet);
-			nombreMap.put("pic" + i, pic);
+				String pic = picTwit(tweet);
+				tweet = formatTweet(tweet);
+
+				System.out.println(idUser);
+				System.out.println(tweet);
+				System.out.println(pic);
+				nombreMap.put("id" + i, idUser);
+				nombreMap.put("tweet" + i, tweet);
+				nombreMap.put("pic" + i, pic);
+
+			}else {
+				nombreMap = null;
+				i=10;
+			}
 
 		}
 
@@ -125,6 +130,5 @@ public class ScrapTweets {
 		System.out.println(pic);
 		return pic;
 	}
-	
 
 }
