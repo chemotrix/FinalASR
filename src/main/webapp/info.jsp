@@ -50,8 +50,9 @@
 				<a href="/"><img src="img/logo.png" alt="" title=""></a>
 			</div>
 			<nav id="nav-menu-container">
-			<h1 class="display-1">TweetsAnalyzer</h1>
+			
 			</nav>
+			<h1 class="display-1">TweetsAnalyzer</h1>
 			<!-- #nav-menu-container -->
 		</div>
 	</div>
