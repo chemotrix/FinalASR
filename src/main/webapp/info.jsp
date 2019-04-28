@@ -112,20 +112,20 @@
 
 
 	<div class="container" style="padding-bottom: 150px;">
-
+		<br> <br>
 
 
 		<%
 			if (request.getAttribute("map") != "true") {
 		%>
 		<div class="row" style="text-align: center;">
-			<div class="col-md-6">
+			<div class="col-md-10">
 				<p class="text-center h2"
-					style="margin-top: 80px; font-size: 48px; margin-bottom: 100px;">
+					style="margin-top: 80px; font-size: 6vw; margin-bottom: 100px;">
 					<a href="http://twitter.com/<%=username%>">@<%=username%></a>
 				</p>
 			</div>
-			<div class="col-md-6">
+			<div class="col-md-2">
 				<img src="https://avatars.io/twitter/<%=username%>"
 					alt="https://avatars.io/twitter/<%=username%>"
 					class="rounded-circle border border-dark" height="200" width="200"
@@ -155,38 +155,47 @@
 		%>
 		<div class="row" style="margin-top: 30px">
 
-			<div class="container">
-				<div class="page-header">
-					<h1 id="timeline">Personality Insight & Tone Analyzer</h1>
-				</div>
+			<div class="row">
+				<div class="container">
+					<br>
+					<hr>
+					<br>
+					<div class="page-header">
+						<h1 id="timeline" style="text-align: center;">Personality
+							Insight & Tone Analyzer</h1>
+					</div>
 
-				<br>
-				<p>Lorem Ipsum is simply dummy text of the printing and
-					typesetting industry. Lorem Ipsum has been the industry's standard
-					dummy text ever since the 1500s, when an unknown printer took a
-					galley of type and scrambled it to make a type specimen book. It
-					has survived not only five centuries, but also the leap into
-					electronic typesetting, remaining essentially unchanged. It was
-					popularised in the 1960s with the release of Letraset sheets
-					containing Lorem Ipsum passages, and more recently with desktop
-					publishing software like Aldus PageMaker including versions of
-					Lorem Ipsum.</p>
-				<br>
-				<p>Lorem Ipsum is simply dummy text of the printing and
-					typesetting industry. Lorem Ipsum has been the industry's standard
-					dummy text ever since the 1500s, when an unknown printer took a
-					galley of type and scrambled it to make a type specimen book. It
-					has survived not only five centuries, but also the leap into
-					electronic typesetting, remaining essentially unchanged. It was
-					popularised in the 1960s with the release of Letraset sheets
-					containing Lorem Ipsum passages, and more recently with desktop
-					publishing software like Aldus PageMaker including versions of
-					Lorem Ipsum.</p>
+					<br>
+					<p>Lorem Ipsum is simply dummy text of the printing and
+						typesetting industry. Lorem Ipsum has been the industry's standard
+						dummy text ever since the 1500s, when an unknown printer took a
+						galley of type and scrambled it to make a type specimen book. It
+						has survived not only five centuries, but also the leap into
+						electronic typesetting, remaining essentially unchanged. It was
+						popularised in the 1960s with the release of Letraset sheets
+						containing Lorem Ipsum passages, and more recently with desktop
+						publishing software like Aldus PageMaker including versions of
+						Lorem Ipsum.</p>
+					<br>
+					<p>Lorem Ipsum is simply dummy text of the printing and
+						typesetting industry. Lorem Ipsum has been the industry's standard
+						dummy text ever since the 1500s, when an unknown printer took a
+						galley of type and scrambled it to make a type specimen book. It
+						has survived not only five centuries, but also the leap into
+						electronic typesetting, remaining essentially unchanged. It was
+						popularised in the 1960s with the release of Letraset sheets
+						containing Lorem Ipsum passages, and more recently with desktop
+						publishing software like Aldus PageMaker including versions of
+						Lorem Ipsum.</p>
+				</div>
 			</div>
 			<div class="row">
 				<div class="container">
+					<br>
+					<hr>
+					<br>
 					<div class="page-header">
-						<h1 id="timeline">Timeline</h1>
+						<h1 id="timeline" style="text-align: center;">Timeline</h1>
 					</div>
 
 
