@@ -47,7 +47,7 @@
 	<div class="container main-menu">
 		<div class="row align-items-center justify-content-between d-flex">
 			<div id="logo">
-				<a href="/FinalASR"><img src="img/logo.png" alt="" title=""></a>
+				<a href="/"><img src="img/logo.png" alt="" title=""></a>
 			</div>
 			<nav id="nav-menu-container">
 			<h1 class="display-1">TweetsAnalyzer</h1>

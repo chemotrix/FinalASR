@@ -47,7 +47,7 @@
 	<div class="container main-menu">
 		<div class="row align-items-center justify-content-between d-flex">
 			<div id="logo">
-				<a href="/FinalASR"><img src="img/logo.png" alt="" title=""></a>
+				<a href="/"><img src="img/logo.png" alt="" title=""></a>
 			</div>
 			<nav id="nav-menu-container">
 			<h1 class="display-1">TweetsAnalyzer</h1>
@@ -104,29 +104,49 @@
 		String tweet = (String) request.getAttribute("tweet");
 		String username = (String) request.getAttribute("username");
 		String id0 = (String) request.getAttribute("id0");
-		String tweet0 = (String) request.getAttribute("tweet0");
 		if (tweet != null) {
 	%>
 
 
 
 	<div class="container" style="padding-bottom: 150px;">
+
+
+
+
 		<div class="row" style="text-align: center;">
 			<div class="col-6">
+
 				<p class="text-center h2"
-					style="margin-top: 80px; margin-left: 100px;">
-					@<%=username%></p>
+					style="margin-top: 80px; margin-left: 123px; font-size: 6vh;">
+					<a href="http://twitter.com/<%=username%>">@<%=username%></a>
+				</p>
 			</div>
 			<div class="col-6">
-				<img src="<%="https://avatars.io/twitter/" + username%>"
+				<img src="https://avatars.io/twitter/<%=username%>"
 					alt="Smiley face" height="200" width="200">
 			</div>
 		</div>
 
-		<div class="row vertical-divider" style="margin-top: 30px">
 
-			<div class="col-4">
-				<p class="h2">Personality Insight</p>
+		<div class="row" style="margin-top: 30px">
+
+			<div class="container">
+				<div class="page-header">
+					<h1 id="timeline">Personality Insight & Tone Analyzer</h1>
+				</div>
+
+				<br>
+				<p>Lorem Ipsum is simply dummy text of the printing and
+					typesetting industry. Lorem Ipsum has been the industry's standard
+					dummy text ever since the 1500s, when an unknown printer took a
+					galley of type and scrambled it to make a type specimen book. It
+					has survived not only five centuries, but also the leap into
+					electronic typesetting, remaining essentially unchanged. It was
+					popularised in the 1960s with the release of Letraset sheets
+					containing Lorem Ipsum passages, and more recently with desktop
+					publishing software like Aldus PageMaker including versions of
+					Lorem Ipsum.</p>
 				<br>
 				<p>Lorem Ipsum is simply dummy text of the printing and
 					typesetting industry. Lorem Ipsum has been the industry's standard
@@ -139,32 +159,75 @@
 					publishing software like Aldus PageMaker including versions of
 					Lorem Ipsum.</p>
 			</div>
-			<div class="col-4">
-				<p class="h2">Tone Analyzer</p>
-				<br>
-				<p>Lorem Ipsum is simply dummy text of the printing and
-					typesetting industry. Lorem Ipsum has been the industry's standard
-					dummy text ever since the 1500s, when an unknown printer took a
-					galley of type and scrambled it to make a type specimen book. It
-					has survived not only five centuries, but also the leap into
-					electronic typesetting, remaining essentially unchanged. It was
-					popularised in the 1960s with the release of Letraset sheets
-					containing Lorem Ipsum passages, and more recently with desktop
-					publishing software like Aldus PageMaker including versions of
-					Lorem Ipsum.</p>
-			</div>
-			<div class="col-4">
-				<p class="h2">Últimos Tweets</p>
-				<br>
-				<%
-					for (int i = 0; i < 10; i++) {
-				%>
-				<!-- p><=request.getAttribute("id"+i)%></p-->
-				<p><%=request.getAttribute("tweet" + i)%></p>
+			<div class="row">
+				<div class="container">
+					<div class="page-header">
+						<h1 id="timeline">Timeline</h1>
+					</div>
+
+
+
+					<ul class="timeline">
+						<%
+							for (int i = 0; i < 10; i++) {
+									String tweet_tmp = (String) request.getAttribute("tweet" + i);
+									String pic_tmp = (String) request.getAttribute("pic" + i);
+									if (i % 2 == 0) {
+						%>
+						<li>
+							<div class="timeline-badge">
+								<i class="glyphicon glyphicon-check"></i>
+							</div>
+							<div class="timeline-panel"
+								style="font-size: 2vh; text-align: left;">
+								<div class="timeline-heading">
+									<h4 class="timeline-title">
+										@<%=username%></h4>
+									<p>
+										<small class="text-muted"><i
+											class="glyphicon glyphicon-time"></i></small>
+									</p>
+								</div>
+								<div class="timeline-body">
+									<p><%=tweet_tmp%></p>
+									<%
+										if (pic_tmp != " "){
+											
+										
+									%>
+									<p><a href="http://<%=pic_tmp%>"><%=pic_tmp%></a></p>
+									<%
+										}
+									%>
+								</div>
+							</div>
+						</li>
+						<%
+							} else {
+						%>
+						<li class="timeline-inverted">
+							<div class="timeline-badge warning">
+								<i class="glyphicon glyphicon-credit-card"></i>
+							</div>
+							<div class="timeline-panel"
+								style="font-size: 2vh; text-align: left;">
+								<div class="timeline-heading">
+									<h4 class="timeline-title">
+										@<%=username%></h4>
+								</div>
+								<div class="timeline-body">
+									<p><%=tweet_tmp%></p>
+								</div>
+							</div>
+						</li>
+						<%
+							}
+								}
+						%>
+					</ul>
+				</div>
 				<hr>
-				<%
-					}
-				%>
+
 			</div>
 		</div>
 	</div>
@@ -220,6 +283,151 @@
 
 
 	<style>
+.timeline {
+	list-style: none;
+	padding: 20px 0 20px;
+	position: relative;
+}
+
+.timeline:before {
+	top: 0;
+	bottom: 0;
+	position: absolute;
+	content: " ";
+	width: 3px;
+	background-color: #eeeeee;
+	left: 50%;
+	margin-left: -1.5px;
+}
+
+.timeline>li {
+	margin-bottom: 20px;
+	position: relative;
+}
+
+.timeline>li:before, .timeline>li:after {
+	content: " ";
+	display: table;
+}
+
+.timeline>li:after {
+	clear: both;
+}
+
+.timeline>li:before, .timeline>li:after {
+	content: " ";
+	display: table;
+}
+
+.timeline>li:after {
+	clear: both;
+}
+
+.timeline>li>.timeline-panel {
+	width: 46%;
+	float: left;
+	border: 1px solid #d4d4d4;
+	border-radius: 2px;
+	padding: 20px;
+	position: relative;
+	-webkit-box-shadow: 0 1px 6px rgba(0, 0, 0, 0.175);
+	box-shadow: 0 1px 6px rgba(0, 0, 0, 0.175);
+}
+
+.timeline>li>.timeline-panel:before {
+	position: absolute;
+	top: 26px;
+	right: -15px;
+	display: inline-block;
+	border-top: 15px solid transparent;
+	border-left: 15px solid #ccc;
+	border-right: 0 solid #ccc;
+	border-bottom: 15px solid transparent;
+	content: " ";
+}
+
+.timeline>li>.timeline-panel:after {
+	position: absolute;
+	top: 27px;
+	right: -14px;
+	display: inline-block;
+	border-top: 14px solid transparent;
+	border-left: 14px solid #fff;
+	border-right: 0 solid #fff;
+	border-bottom: 14px solid transparent;
+	content: " ";
+}
+
+.timeline>li>.timeline-badge {
+	color: #fff;
+	width: 50px;
+	height: 50px;
+	line-height: 50px;
+	font-size: 1.4em;
+	text-align: center;
+	position: absolute;
+	top: 16px;
+	left: 50%;
+	margin-left: -25px;
+	background-color: #999999;
+	z-index: 100;
+	border-top-right-radius: 50%;
+	border-top-left-radius: 50%;
+	border-bottom-right-radius: 50%;
+	border-bottom-left-radius: 50%;
+}
+
+.timeline>li.timeline-inverted>.timeline-panel {
+	float: right;
+}
+
+.timeline>li.timeline-inverted>.timeline-panel:before {
+	border-left-width: 0;
+	border-right-width: 15px;
+	left: -15px;
+	right: auto;
+}
+
+.timeline>li.timeline-inverted>.timeline-panel:after {
+	border-left-width: 0;
+	border-right-width: 14px;
+	left: -14px;
+	right: auto;
+}
+
+.timeline-badge.primary {
+	background-color: #2e6da4 !important;
+}
+
+.timeline-badge.success {
+	background-color: #3f903f !important;
+}
+
+.timeline-badge.warning {
+	background-color: #f0ad4e !important;
+}
+
+.timeline-badge.danger {
+	background-color: #d9534f !important;
+}
+
+.timeline-badge.info {
+	background-color: #5bc0de !important;
+}
+
+.timeline-title {
+	margin-top: 0;
+	color: inherit;
+}
+
+.timeline-body>p, .timeline-body>ul {
+	margin-bottom: 0;
+}
+
+.timeline-body>p+p {
+	margin-top: 5px;
+}
+
 .row.vertical-divider {
 	overflow: hidden;
 }
