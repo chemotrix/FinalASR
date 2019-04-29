@@ -32,12 +32,13 @@ import asr.proyectoFinal.dao.CloudantPalabraStore;
 import asr.proyectoFinal.dominio.Palabra;
 import asr.proyectoFinal.services.Traductor;
 import asr.proyectoFinal.services.ScrapTweets;
+import asr.proyectoFinal.services.TAnalysis;
 import asr.proyectoFinal.services.Text2Speech;
 
 /**
  * Servlet implementation class Controller
  */
-@WebServlet(urlPatterns = { "/listar", "/insertar", "/hablar", "/texttospeech", "/getTweets" })
+@WebServlet(urlPatterns = { "/listar", "/insertar", "/tanalysis", "/texttospeech", "/getTweets" })
 public class Controller extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static Logger logger = Logger.getLogger(Controller.class.getName());
@@ -61,6 +62,7 @@ public class Controller extends HttpServlet {
 		case "/getTweets":
 			request.setAttribute("tweet", "true");
 			String username = request.getParameter("username");
+			String tone = "";
 			request.setAttribute("username", username);
 			if (username == null)
 				request.setAttribute("usernameNull", "True");
@@ -87,6 +89,14 @@ public class Controller extends HttpServlet {
 			 * else out.println("No hay DB");
 			 */
 			request.setAttribute("listar", listar);
+			break;
+		
+		case "/tanalysis":
+			String tanalysis = "True";
+			String textanalysis = request.getParameter("text");
+			String s = TAnalysis.get_sentiment(textanalysis);
+			request.setAttribute("tanalysis", tanalysis);
+			request.setAttribute("sentiment", s);
 			break;
 
 		}

@@ -103,6 +103,7 @@
 	</div>
 
 	<%
+		String tone = (String) request.getAttribute("tone");
 		String tweet = (String) request.getAttribute("tweet");
 		String username = (String) request.getAttribute("username");
 		String id0 = (String) request.getAttribute("id0");
@@ -162,7 +163,7 @@
 					<br>
 					<div class="page-header">
 						<h1 id="timeline" style="text-align: center;">Personality
-							Insight & Tone Analyzer</h1>
+							Insight</h1>
 					</div>
 
 					<br>
@@ -189,13 +190,14 @@
 						Lorem Ipsum.</p>
 				</div>
 			</div>
+
 			<div class="row">
 				<div class="container">
 					<br>
 					<hr>
 					<br>
 					<div class="page-header">
-						<h1 id="timeline" style="text-align: center;">Timeline</h1>
+						<h1 id="timeline" style="text-align: center;">Sentiment Timeline Analysis</h1>
 					</div>
 
 
@@ -205,6 +207,10 @@
 							for (int i = 0; i < 10; i++) {
 										String tweet_tmp = (String) request.getAttribute("tweet" + i);
 										String pic_tmp = (String) request.getAttribute("pic" + i);
+										String tone_tmp = (String) request.getAttribute("tone" + i);
+										if (tone_tmp == "")
+											tone_tmp = "Neutral";
+
 										if (i % 2 == 0) {
 						%>
 						<li>
@@ -232,6 +238,12 @@
 									<%
 										}
 									%>
+
+									<br>
+									<p
+										style="text-align: center; color: #11b537d6; font-weight: bold; font-size: 26px;">
+										SENTIMENT ANALYSIS:
+										<%=tone_tmp%></p>
 								</div>
 							</div>
 						</li>
@@ -250,6 +262,21 @@
 								</div>
 								<div class="timeline-body">
 									<p><%=tweet_tmp%></p>
+									<%
+										if (pic_tmp != " ") {
+									%>
+									<p>
+										<a href="http://<%=pic_tmp%>"><%=pic_tmp%></a>
+									</p>
+									<%
+										}
+									%>
+
+									<br>
+									<p
+										style="text-align: center; color: #11b537d6; font-weight: bold; font-size: 26px;">
+										SENTIMENT ANALYSIS:
+										<%=tone_tmp%></p>
 								</div>
 							</div>
 						</li>

@@ -54,9 +54,9 @@ public class ScrapTweets {
 					content.append(System.lineSeparator());
 				}
 			}
-
+			System.out.println(content.toString());
 			nombreMap = convertToMap(nombreMap, content.toString());
-			// System.out.println(jsonObject.get("age"));
+
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -69,9 +69,11 @@ public class ScrapTweets {
 		// TODO Auto-generated method stub
 		int num = 0;
 		int index = 0;
+		
 		for (int i = 0; i < 10; i++) {
 			// GET ID USER
 			index = content.indexOf('"', num);
+			System.out.println(index);
 			if (index != -1) {
 
 				String idUser = content.substring(index + 1, content.indexOf('"', index + 2));
@@ -85,20 +87,24 @@ public class ScrapTweets {
 				String pic = picTwit(tweet);
 				tweet = formatTweet(tweet);
 
+				String tone = TAnalysis.get_sentiment(tweet);
+				System.out.println(tone);
 				System.out.println(idUser);
 				System.out.println(tweet);
 				System.out.println(pic);
+				tone = formatTone(tone);
+				
 				nombreMap.put("id" + i, idUser);
 				nombreMap.put("tweet" + i, tweet);
 				nombreMap.put("pic" + i, pic);
-
+				nombreMap.put("tone" + i, tone);
 			}else {
 				nombreMap = null;
 				i=10;
 			}
 
 		}
-
+		
 		/*
 		 * System.out.println(content.substring(index + 1, content.indexOf('"', index +
 		 * 2))); System.out.println(content.indexOf('"'));
@@ -106,6 +112,18 @@ public class ScrapTweets {
 		 */
 		// nombreMap.put("content", content);
 		return nombreMap;
+	}
+
+	private static String formatTone(String tone) {
+		int index = tone.indexOf("tone_name", 0);
+		String result = "";
+		if (index != -1) {
+			result=tone.substring(index+12, tone.indexOf('"', index+13));
+			System.out.println(tone.substring(index+12, tone.indexOf('"', index+13)));
+			
+		}
+		
+		return result;
 	}
 
 	private static String formatTweet(String tweet) {
