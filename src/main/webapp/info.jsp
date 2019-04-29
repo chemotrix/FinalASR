@@ -95,6 +95,23 @@
 					</div>
 
 				</form>
+				<br>
+				<form class="form-inline" method="post" action="/listar">
+
+					<div class="container" style="">
+
+						<div class="row" style="text-align: center;">
+							<div class="col-md-10" style="padding-bottom: 10px;"></div>
+							<div class="col-md-2"
+								style="text-align: center; width: 100%; padding-bottom: 10px;">
+								<input class="btn btn-primary btn-lg active" type="submit"
+									style="width: 100%;" value="Listar">
+							</div>
+						</div>
+
+					</div>
+
+				</form>
 				<br> <br>
 
 			</div>
@@ -107,7 +124,13 @@
 		String tweet = (String) request.getAttribute("tweet");
 		String username = (String) request.getAttribute("username");
 		String id0 = (String) request.getAttribute("id0");
-		if (tweet != null) {
+
+		if (request.getAttribute("listar") == "True") {
+	%>
+	<div><%=request.getAttribute("cloudant")%></div>
+	<%
+		} else {
+			if (tweet != null) {
 	%>
 
 
@@ -115,14 +138,13 @@
 	<div class="container" style="padding-bottom: 150px;">
 		<br> <br>
 
-
 		<%
 			if (request.getAttribute("map") != "true") {
 		%>
 		<div class="row" style="text-align: center;">
 			<div class="col-md-10">
 				<p class="text-center h2"
-					style="margin-top: 80px; font-size: 6vw; margin-bottom: 100px;">
+					style="margin-top: 80px; font-size: 5.3vw; margin-bottom: 100px;">
 					<a href="http://twitter.com/<%=username%>">@<%=username%></a>
 				</p>
 			</div>
@@ -152,7 +174,7 @@
 		<%
 			}
 
-				if (request.getAttribute("map") != "true") {
+					if (request.getAttribute("map") != "true") {
 		%>
 		<div class="row" style="margin-top: 30px">
 
@@ -197,7 +219,8 @@
 					<hr>
 					<br>
 					<div class="page-header">
-						<h1 id="timeline" style="text-align: center;">Sentiment Timeline Analysis</h1>
+						<h1 id="timeline" style="text-align: center;">Sentiment
+							Timeline Analysis</h1>
 					</div>
 
 
@@ -205,13 +228,13 @@
 					<ul class="timeline">
 						<%
 							for (int i = 0; i < 10; i++) {
-										String tweet_tmp = (String) request.getAttribute("tweet" + i);
-										String pic_tmp = (String) request.getAttribute("pic" + i);
-										String tone_tmp = (String) request.getAttribute("tone" + i);
-										if (tone_tmp == "")
-											tone_tmp = "Neutral";
+											String tweet_tmp = (String) request.getAttribute("tweet" + i);
+											String pic_tmp = (String) request.getAttribute("pic" + i);
+											String tone_tmp = (String) request.getAttribute("tone" + i);
+											if (tone_tmp == "")
+												tone_tmp = "Neutral, with score of 50%";
 
-										if (i % 2 == 0) {
+											if (i % 2 == 0) {
 						%>
 						<li>
 							<div class="timeline-badge">
@@ -221,7 +244,10 @@
 								style="font-size: 2vh; text-align: left;">
 								<div class="timeline-heading">
 									<h4 class="timeline-title">
-										@<%=username%></h4>
+										<img src="https://avatars.io/twitter/<%=username%>"
+											alt="https://avatars.io/twitter/<%=username%>"
+											class="rounded-circle border border-dark" height="50"
+											width="50" style="border: 2px solid #222222 !important;">@<%=username%></h4>
 									<p>
 										<small class="text-muted"><i
 											class="glyphicon glyphicon-time"></i></small>
@@ -241,9 +267,10 @@
 
 									<br>
 									<p
-										style="text-align: center; color: #11b537d6; font-weight: bold; font-size: 26px;">
-										SENTIMENT ANALYSIS:
-										<%=tone_tmp%></p>
+										style="text-align: center; color: #11b537d6; font-size: 26px;">
+										Top sentiment:<br> <br> <span
+											style="font-weight: bold;"> <%=tone_tmp%></span>
+									</p>
 								</div>
 							</div>
 						</li>
@@ -258,9 +285,13 @@
 								style="font-size: 2vh; text-align: left;">
 								<div class="timeline-heading">
 									<h4 class="timeline-title">
-										@<%=username%></h4>
+										<img src="https://avatars.io/twitter/<%=username%>"
+											alt="https://avatars.io/twitter/<%=username%>"
+											class="rounded-circle border border-dark" height="50"
+											width="50" style="border: 2px solid #222222 !important;">@<%=username%></h4>
 								</div>
 								<div class="timeline-body">
+									<br>
 									<p><%=tweet_tmp%></p>
 									<%
 										if (pic_tmp != " ") {
@@ -274,15 +305,16 @@
 
 									<br>
 									<p
-										style="text-align: center; color: #11b537d6; font-weight: bold; font-size: 26px;">
-										SENTIMENT ANALYSIS:
-										<%=tone_tmp%></p>
+										style="text-align: center; color: #11b537d6; font-size: 26px;">
+										Top sentiment:<br> <br> <span
+											style="font-weight: bold;"><%=tone_tmp%><span>
+									</p>
 								</div>
 							</div>
 						</li>
 						<%
 							}
-									}
+										}
 						%>
 					</ul>
 				</div>
@@ -290,20 +322,22 @@
 
 			</div>
 
-			<%
-				}
-			%>
+
 		</div>
+
 	</div>
 
-	< <%
- 	} else {
- %>
+	<%
+		} else {
+	%>
 	<p>
 		NOT WORKING<%=tweet%><%=username%></p>
 	<%
 		}
-	%> </section>
+			}
+
+		}
+	%> %> </section>
 	<!-- End brands Area -->
 
 

@@ -25,14 +25,15 @@ import com.cloudant.client.api.CloudantClient;
 import com.cloudant.client.api.Database;
 import com.google.gson.JsonObject;
 
-import asr.proyectoFinal.dominio.Palabra;
+import asr.proyectoFinal.dominio.Tweet;
 
-public class CloudantPalabraStore
+
+public class CloudantTweetStore
 {
 	private Database db = null;
 	private static final String databaseName = "mydb";
 	
-	public CloudantPalabraStore(){
+	public CloudantTweetStore(){
 		CloudantClient cloudant = createClient();
 		if(cloudant!=null){
 		 db = cloudant.database(databaseName, true);
@@ -76,10 +77,10 @@ public class CloudantPalabraStore
 		}
 	}
 	
-	public Collection<Palabra> getAll(){
-        List<Palabra> docs;
+	public Collection<Tweet> getAll(){
+        List<Tweet> docs;
 		try {
-			docs = db.getAllDocsRequestBuilder().includeDocs(true).build().getResponse().getDocsAs(Palabra.class);
+			docs = db.getAllDocsRequestBuilder().includeDocs(true).build().getResponse().getDocsAs(Tweet.class);
 		} catch (IOException e) {
 			return null;
 		}
@@ -87,26 +88,29 @@ public class CloudantPalabraStore
 	}
 
 	
-	public Palabra get(String id) {
-		return db.find(Palabra.class, id);
+	public Tweet get(String id) {
+		return db.find(Tweet.class, id);
 	}
 
 	
-	public Palabra persist(Palabra td) {
+	public Tweet persist(Tweet td) {
 		String id = db.save(td).getId();
-		return db.find(Palabra.class, id);
+		return db.find(Tweet.class, id);
 	}
 
-	public Palabra update(String id, Palabra newPalabra) {
-		Palabra visitor = db.find(Palabra.class, id);
-		visitor.setName(newPalabra.getName());
+	public Tweet update(String id, Tweet newTweet) {
+		Tweet visitor = db.find(Tweet.class, id);
+		visitor.setidTweet(newTweet.getidTweet());
+		visitor.setTweet(newTweet.getTweet());
+		visitor.setPic(newTweet.getPic());
+		visitor.setTone(newTweet.getTone());
 		db.update(visitor);
-		return db.find(Palabra.class, id);
+		return db.find(Tweet.class, id);
 		
 	}
 
 	public void delete(String id) {
-		Palabra visitor = db.find(Palabra.class, id);
+		Tweet visitor = db.find(Tweet.class, id);
 		db.remove(id, visitor.get_rev());
 		
 	}

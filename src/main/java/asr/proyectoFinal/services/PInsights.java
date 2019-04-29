@@ -56,9 +56,9 @@ public class PInsights {
 			  .text(text)
 			  .build();
 
-			Profile profile = service.profile(profileOptions).execute().getResult();
+			//Profile profile = service.profile(profileOptions).execute().getResult();
 			
-			System.out.println(profile);
+			//System.out.println(profile);
 
 		} catch (Exception e) {
 			e.printStackTrace();

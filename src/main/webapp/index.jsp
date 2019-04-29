@@ -90,6 +90,28 @@
 					</div>
 
 				</form>
+				<br>
+				<form class="form-inline" method="post" action="/listar">
+
+					<div class="container" style="">
+
+						<div class="row" style="text-align: center;">
+							<div class="col-md-4" style="padding-bottom: 10px;">
+								
+							</div>
+							<div class="col-md-4"
+								style="text-align: center; width: 100%; padding-bottom: 10px;">
+								<input class="btn btn-primary btn-lg active" type="submit"
+									style="width: 100%;" value="Listar">
+							</div>
+							<div class="col-md-4" style="padding-bottom: 10px;">
+								
+							</div>
+						</div>
+
+					</div>
+
+				</form>
 				<br> <br>
 
 			</div>

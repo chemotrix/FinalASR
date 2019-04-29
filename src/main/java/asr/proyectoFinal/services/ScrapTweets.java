@@ -2,21 +2,26 @@ package asr.proyectoFinal.services;
 
 import java.util.*;
 
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
-import com.google.gson.Gson;
+import asr.proyectoFinal.dao.CloudantTweetStore;
+
+import asr.proyectoFinal.dominio.Tweet;
 
 import java.io.BufferedReader;
-import java.io.FileReader;
+
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.math.RoundingMode;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.text.DecimalFormat;
 
 public class ScrapTweets {
 
 	private static HttpURLConnection con;
+	private static CloudantTweetStore store = new CloudantTweetStore();
 
 	public static Map<String, String> get_tweets(String NombreUsuario) {
 
@@ -57,7 +62,6 @@ public class ScrapTweets {
 			System.out.println(content.toString());
 			nombreMap = convertToMap(nombreMap, content.toString());
 
-
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -68,43 +72,66 @@ public class ScrapTweets {
 	private static Map<String, String> convertToMap(Map<String, String> nombreMap, String content) {
 		// TODO Auto-generated method stub
 		int num = 0;
-		int index = 0;
 		
-		for (int i = 0; i < 10; i++) {
-			// GET ID USER
-			index = content.indexOf('"', num);
-			System.out.println(index);
-			if (index != -1) {
+		System.out.println(
+				"--------------------------------------------------------------------------------------------------------");
+		System.out.println(content.toString());
+		System.out.println(
+				"--------------------------------------------------------------------------------------------------------");
 
-				String idUser = content.substring(index + 1, content.indexOf('"', index + 2));
-				num = content.indexOf('"', index + 2) + 1;
-
-				// GET TWEET
-				index = content.indexOf('"', num);
-				String tweet = content.substring(index + 1, content.indexOf('"', index + 2));
-				num = content.indexOf('"', index + 2) + 1;
-
+		try {
+			JSONObject obj = new JSONObject(content.toString());
+			Iterator<String> keys = obj.keys();
+			num = 0;
+			while (keys.hasNext()) {
+				String idUser = (String) keys.next();
+				String tweet = obj.getString(idUser);
 				String pic = picTwit(tweet);
 				tweet = formatTweet(tweet);
 
 				String tone = TAnalysis.get_sentiment(tweet);
-				System.out.println(tone);
+				// System.out.println(tone);
 				System.out.println(idUser);
 				System.out.println(tweet);
 				System.out.println(pic);
 				tone = formatTone(tone);
-				
-				nombreMap.put("id" + i, idUser);
-				nombreMap.put("tweet" + i, tweet);
-				nombreMap.put("pic" + i, pic);
-				nombreMap.put("tone" + i, tone);
-			}else {
-				nombreMap = null;
-				i=10;
+
+				nombreMap.put("id" + num, idUser);
+				nombreMap.put("tweet" + num, tweet);
+				nombreMap.put("pic" + num, pic);
+				nombreMap.put("tone" + num, tone);
+				storeTweet(idUser, tweet, pic, tone);
+				num++;
 			}
 
+		} catch (Exception e) {
+			System.out.println("DOCUMENT_TONE NOT FOUND FOR THIS TWEET");
 		}
-		
+
+		/*
+		 * for (int i = 0; i < 10; i++) { // GET ID USER index = content.indexOf('"',
+		 * num); System.out.println(index); if (index != -1) {
+		 * 
+		 * String idUser = content.substring(index + 1, content.indexOf('"', index +
+		 * 2)); num = content.indexOf('"', index + 2) + 1;
+		 * 
+		 * // GET TWEET index = content.indexOf('"', num); String tweet =
+		 * content.substring(index + 1, content.indexOf('"', index + 2)); num =
+		 * content.indexOf('"', index + 2) + 1;
+		 * 
+		 * String pic = picTwit(tweet); tweet = formatTweet(tweet);
+		 * 
+		 * String tone = TAnalysis.get_sentiment(tweet); // System.out.println(tone);
+		 * System.out.println(idUser); System.out.println(tweet);
+		 * System.out.println(pic); tone = formatTone(tone);
+		 * 
+		 * nombreMap.put("id" + i, idUser); nombreMap.put("tweet" + i, tweet);
+		 * nombreMap.put("pic" + i, pic); nombreMap.put("tone" + i, tone); } else {
+		 * nombreMap = null; i = 10; }
+		 * 
+		 * }
+		 */
+
 		/*
 		 * System.out.println(content.substring(index + 1, content.indexOf('"', index +
 		 * 2))); System.out.println(content.indexOf('"'));
@@ -114,15 +141,68 @@ public class ScrapTweets {
 		return nombreMap;
 	}
 
-	private static String formatTone(String tone) {
-		int index = tone.indexOf("tone_name", 0);
-		String result = "";
-		if (index != -1) {
-			result=tone.substring(index+12, tone.indexOf('"', index+13));
-			System.out.println(tone.substring(index+12, tone.indexOf('"', index+13)));
-			
+	private static void storeTweet(String idUser, String tweet, String pic, String tone) {
+		Tweet t = new Tweet(idUser, tweet, pic, tone);
+
+		if (tweet != null && tweet != "") {
+			if (store.getDB() != null) {
+				store.persist(t);
+			}
 		}
-		
+
+	}
+
+	private static String formatTone(String tone) {
+		JSONObject obj = new JSONObject(tone);
+		String result = "";
+		float score_def = 0;
+		String tonename_def = null;
+		try {
+			JSONObject obj_documenttone = obj.getJSONObject("document_tone");
+			JSONArray arr_documenttone = obj_documenttone.getJSONArray("tones");
+
+			for (int i = 0; i < arr_documenttone.length(); i++) {
+
+				float score = arr_documenttone.getJSONObject(i).getFloat("score");
+				String tone_name = arr_documenttone.getJSONObject(i).getString("tone_name");
+				System.out.println("\n\n\tScore: " + score);
+				System.out.println("\tTone_name: " + tone_name);
+				if (score > score_def) {
+					score_def = score;
+					tonename_def = tone_name;
+				}
+			}
+
+		} catch (Exception e) {
+			System.out.println("DOCUMENT_TONE NOT FOUND FOR THIS TWEET");
+		}
+
+		try {
+			JSONObject obj_sentencetone = obj.getJSONObject("sentence_tone");
+			JSONArray arr_sentencetone = obj_sentencetone.getJSONArray("tones");
+
+			for (int i = 0; i < arr_sentencetone.length(); i++) {
+
+				float score = arr_sentencetone.getJSONObject(i).getFloat("score");
+				String tone_name = arr_sentencetone.getJSONObject(i).getString("tone_name");
+				System.out.println("\n\n\tScore: " + score);
+				System.out.println("\tTone_name: " + tone_name);
+				if (score > score_def) {
+					score_def = score;
+					tonename_def = tone_name;
+				}
+			}
+
+		} catch (Exception e) {
+			System.out.println("SENTENCE_TONE NOT FOUND FOR THIS TWEET");
+		}
+		if (score_def > 0) {
+			DecimalFormat df = new DecimalFormat("#.##");
+			df.setRoundingMode(RoundingMode.CEILING);
+			String s = df.format(score_def * 100);
+			result = tonename_def + ", with score " + s + "%";
+		}
+
 		return result;
 	}
 

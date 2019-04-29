@@ -19,15 +19,27 @@ package asr.proyectoFinal.dominio;
  * Represents a Visitor document stored in Cloudant.
  */
 
-public class Palabra {
+public class Tweet {
 	private String _id;
 	private String _rev;
-	private String name = null;
+	private String idTweet = null;
+	private String tweet = null;
+	private String pic = null;
+	private String tone = null;
 
-	public Palabra() {
-		this.name = "";
+	public Tweet() {
+		this.idTweet = "";
+		this.tweet = "";
+		this.pic = "";
+		this.tone = "";
 	}
-
+	
+	public Tweet(String idTweet,String tweet,String pic,String tone){
+		this.idTweet = idTweet;
+		this.tweet = tweet;
+		this.pic = pic;
+		this.tone = tone;
+	}
 	/**
 	 * Gets the ID.
 	 * 
@@ -35,6 +47,38 @@ public class Palabra {
 	 */
 	public String get_id() {
 		return _id;
+	}
+
+	public String getidTweet() {
+		return idTweet;
+	}
+
+	public void setidTweet(String idTweet) {
+		this.idTweet = idTweet;
+	}
+
+	public String getTweet() {
+		return tweet;
+	}
+
+	public void setTweet(String tweet) {
+		this.tweet = tweet;
+	}
+
+	public String getPic() {
+		return pic;
+	}
+
+	public void setPic(String pic) {
+		this.pic = pic;
+	}
+
+	public String getTone() {
+		return tone;
+	}
+
+	public void setTone(String tone) {
+		this.tone = tone;
 	}
 
 	/**
@@ -66,29 +110,12 @@ public class Palabra {
 		this._rev = _rev;
 	}
 	
-	/**
-	 * Gets the visitorName of the document.
-	 * 
-	 * @return The name of the document.
-	 */
-	public String getName() {
-		return name;
-	}
-
-	/**
-	 * Sets the name
-	 * 
-	 * @param name
-	 *            The visitorName to set.
-	 */
-	public void setName(String visitorName) {
-		this.name = visitorName;
-	}
+	
 	
 	@Override
-	public String toString()
-	{
-		return name;
+	public String toString() {
+		return "Tweet [idTweet=" + idTweet + ", tweet=" + tweet + ", pic=" + pic
+				+ ", tone=" + tone + "]";
 	}
 
 }
