@@ -78,7 +78,7 @@ public class ScrapTweets {
 		System.out.println(content.toString());
 		System.out.println(
 				"--------------------------------------------------------------------------------------------------------");
-
+		String alltweets = "";
 		try {
 			JSONObject obj = new JSONObject(content.toString());
 			Iterator<String> keys = obj.keys();
@@ -87,13 +87,14 @@ public class ScrapTweets {
 				String idUser = (String) keys.next();
 				String tweet = obj.getString(idUser);
 				String pic = picTwit(tweet);
+				alltweets = alltweets + tweet;
 				tweet = formatTweet(tweet);
-
+				
 				String tone = TAnalysis.get_sentiment(tweet);
 				// System.out.println(tone);
-				System.out.println(idUser);
-				System.out.println(tweet);
-				System.out.println(pic);
+				//System.out.println(idUser);
+				//System.out.println(tweet);
+				//System.out.println(pic);
 				tone = formatTone(tone);
 
 				nombreMap.put("id" + num, idUser);
@@ -107,7 +108,14 @@ public class ScrapTweets {
 		} catch (Exception e) {
 			System.out.println("DOCUMENT_TONE NOT FOUND FOR THIS TWEET");
 		}
-
+		System.out.println("________============______________");
+		
+		
+		String insi = PInsights.get_pinsights(alltweets);
+		System.out.println(alltweets);
+		System.out.println("________============______________");
+		System.out.println(insi);
+		nombreMap.put("insi", insi);
 		/*
 		 * for (int i = 0; i < 10; i++) { // GET ID USER index = content.indexOf('"',
 		 * num); System.out.println(index); if (index != -1) {
@@ -200,7 +208,8 @@ public class ScrapTweets {
 			DecimalFormat df = new DecimalFormat("#.##");
 			df.setRoundingMode(RoundingMode.CEILING);
 			String s = df.format(score_def * 100);
-			result = tonename_def + ", with score " + s + "%";
+			//result = tonename_def + ", with score " + s + "%";
+			result = tonename_def + " - " + s + "%";
 		}
 
 		return result;

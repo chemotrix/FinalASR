@@ -23,11 +23,11 @@ public class PInsights {
 	private static HttpURLConnection con;
 
 	public static String get_pinsights(String text) {
-			String s = null;
+			
 		try {
 			
 			
-			PersonalityInsights service = new PersonalityInsights("2016-10-19");
+			PersonalityInsights service = new PersonalityInsights("2017-10-13");
 			IamOptions options = new IamOptions.Builder()
 			  .apiKey("SAAn-fVYFPx5TbeeI81h-JZoABauYvEJFU97ml9qyRC1")
 			  .build();
@@ -56,15 +56,15 @@ public class PInsights {
 			  .text(text)
 			  .build();
 
-			//Profile profile = service.profile(profileOptions).execute().getResult();
-			
-			//System.out.println(profile);
+			String profile = service.profile(profileOptions).execute().getPersonality().toString();
+			System.out.println("ASDKDLAKSMDLAKMSDLMALSKMDALKMDLM");
+			System.out.println(profile);
 
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
-		return s;
+		return "LLL";
 	}
 
 	

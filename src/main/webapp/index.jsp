@@ -67,7 +67,7 @@
 
 				<hr>
 
-				<form class="form-inline" method="post" action="/getTweets">
+				<form class="form-inline" method="post" action="/FinalASR/getTweets">
 
 					<div class="container" style="">
 
