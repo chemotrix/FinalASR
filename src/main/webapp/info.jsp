@@ -71,7 +71,7 @@
 
 				<hr>
 
-				<form class="form-inline" method="post" action="/FinalASR/getTweets">
+				<form class="form-inline" method="post" action="/getTweets">
 
 					<div class="container" style="">
 
@@ -127,7 +127,37 @@
 
 		if (request.getAttribute("listar") == "True") {
 	%>
-	<div><%=request.getAttribute("cloudant")%></div>
+	<div class="container">
+		<div
+			style="text-align: left; font-size: xx-large; font-weight: bold; color: #0062cc;">
+			BASE DE DATOS</div>
+		<br />
+		<div class="col-md-6">
+			<span style="font-weight: normal; font-size: large;"> Se
+				almacena cada Tweet con los siguientes atributos: </span>
+			<ul class="list-group list-group-flush">
+				<li class="list-group-item"
+					style="font-size: 20px; font-weight: 500;"> - idTweet</li>
+				<li class="list-group-item"
+					style="font-size: 20px; font-weight: 500;"> - tweet (el texto que
+					dice el tweet)</li>
+				<li class="list-group-item"
+					style="font-size: 20px; font-weight: 500;"> - pic (si incluia una
+					foto o un video)</li>
+				<li class="list-group-item"
+					style="font-size: 20px; font-weight: 500;"> - tone (sentiment
+					analysis del tweet)</li>
+			</ul>
+		</div>
+	</div>
+	<br>
+	<br>
+	<div class="row">
+		<div class="container" style="text-align: justify;">
+			<%=request.getAttribute("cloudant")%>
+		</div>
+	</div>
+
 	<%
 		} else {
 			if (tweet != null) {
@@ -162,7 +192,7 @@
 		<div class="row" style="text-align: center;">
 			<div class="col-md-12">
 				<p class="text-center h2" style="margin-top: 80px; font-size: 48px;">
-				<div class="alert alert-danger" role="alert"
+					<div class="alert alert-danger" role="alert"
 					style="font-size: 25px;">
 					Oops! Ese usuario no existe, quizá estes buscando analizar a <a
 						href="/getTweets?username=vox_es">Vox_es</a>
@@ -178,7 +208,7 @@
 		%>
 		<div class="row" style="margin-top: 30px">
 
-			<div class="row">
+			<div class="col-md-12">
 				<div class="container">
 					<br>
 					<hr>
@@ -193,7 +223,7 @@
 				</div>
 			</div>
 
-			<div class="row">
+			<div class="col-md-12">
 				<div class="container">
 					<br>
 					<hr>
@@ -212,7 +242,7 @@
 											String pic_tmp = (String) request.getAttribute("pic" + i);
 											String tone_tmp = (String) request.getAttribute("tone" + i);
 											if (tone_tmp == "")
-												tone_tmp = "Neutral, with score of 50%";
+												tone_tmp = "Neutral - 50%";
 
 											if (i % 2 == 0) {
 						%>
@@ -288,6 +318,7 @@
 										style="text-align: center; color: #11b537d6; font-size: 26px;">
 										Top sentiment:<br> <br> <span
 											style="font-weight: bold;"><%=tone_tmp%><span>
+									
 									</p>
 								</div>
 							</div>
@@ -332,9 +363,9 @@
 
 		}
 	</script>
-	<!-- start footer Area -->
+					<!-- start footer Area -->
 	<footer class=""
-		style="
+						style="
     height: 100px;
     background-color: black;
     bottom: 0px;
@@ -345,7 +376,7 @@
 	<div class="" style="background-color: black;">
 		<div class="container">
 			<div class="col-lg-12 col-md-12 col-sm-12"
-				style="background-color: black;">
+								style="background-color: black;">
 				<div class="single-footer-widget">
 					<br> <br>
 					<h3 style="color: #fff;">ARQUITECTURA DE SERVICIOS EN RED</h3>
@@ -534,7 +565,7 @@
 	<script src="js/popper.min.js"></script>
 	<script src="js/vendor/bootstrap.min.js"></script>
 	<script
-		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBhOdIF3Y9382fqJYt5I_sswSrEw5eihAA"></script>
+						src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBhOdIF3Y9382fqJYt5I_sswSrEw5eihAA"></script>
 	<script src="js/easing.min.js"></script>
 	<script src="js/hoverIntent.js"></script>
 	<script src="js/superfish.min.js"></script>
@@ -551,7 +582,8 @@
 	<script src="js/main.js"></script>
 
 	<nav id="mobile-nav"> </nav>
-	<div id="mobile-body-overly"></div>
+	
+				<div id="mobile-body-overly"></div>
 
 
 	<nav id="mobile-nav"> </nav>

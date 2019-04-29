@@ -83,7 +83,7 @@ public class ScrapTweets {
 			JSONObject obj = new JSONObject(content.toString());
 			Iterator<String> keys = obj.keys();
 			num = 0;
-			while (keys.hasNext()) {
+			while (keys.hasNext() && num<10) {
 				String idUser = (String) keys.next();
 				String tweet = obj.getString(idUser);
 				String pic = picTwit(tweet);
@@ -186,7 +186,7 @@ public class ScrapTweets {
 		}
 
 		try {
-			JSONObject obj_sentencetone = obj.getJSONObject("sentence_tone");
+			JSONObject obj_sentencetone = obj.getJSONObject("sentences_tone");
 			JSONArray arr_sentencetone = obj_sentencetone.getJSONArray("tones");
 
 			for (int i = 0; i < arr_sentencetone.length(); i++) {
