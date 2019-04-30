@@ -66,8 +66,13 @@
 
 
 				<hr>
-
-				<form class="form-inline" method="post" action="/getTweets">
+				<script>
+				function loadingani() {
+					document.getElementById("mom").style.display = "block";
+				    return false;
+				}
+				</script>
+				<form class="form-inline" method="post" action="/getTweets" onsubmit="return loadingani();">
 
 					<div class="container" style="">
 
@@ -81,14 +86,9 @@
 									class="form-control form-control-lg" id="colFormLabelLg"
 									placeholder="Insertar aqui" style="width: inherit;">
 							</div>
-							<script>
-							function loadingani() {
-								document.getElementById("mom").style.display = "block";
-							    return false;
-							}
-							</script>
+							
 							<div class="col-md-2" style="text-align: center; width: 100%;">
-								<input onsubmit="return loadingani();" class="btn btn-primary btn-lg active" type="submit"
+								<input  class="btn btn-primary btn-lg active" type="submit"
 									value="Enviar" style="width: 100%;">
 							</div>
 						</div>
