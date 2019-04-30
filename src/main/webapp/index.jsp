@@ -67,13 +67,14 @@
 
 				<hr>
 				<script>
-				function loadingani() {
-					document.getElementById("mom").style.display = "block";
-					document.getElementById("elformo").submit(); 
-				    return false;
-				}
+					function loadingani() {
+						document.getElementById("mom").style.display = "block";
+						document.getElementById("elformo").submit();
+						return false;
+					}
 				</script>
-				<form class="form-inline" id = "elformo" method="post" action="/getTweets" >
+				<form class="form-inline" id="elformo" method="post"
+					action="/getTweets">
 
 					<div class="container" style="">
 
@@ -87,41 +88,37 @@
 									class="form-control form-control-lg" id="colFormLabelLg"
 									placeholder="Insertar aqui" style="width: inherit;">
 							</div>
-							
+
 							<div class="col-md-2" style="text-align: center; width: 100%;">
-								<input  class="btn btn-primary btn-lg active" type="submit" onclick="return loadingani();"
-									value="Enviar" style="width: 100%;">
+								<input class="btn btn-primary btn-lg active" type="submit"
+									onclick="return loadingani();" value="Enviar"
+									style="width: 100%;">
 							</div>
 						</div>
 
 					</div>
 
 				</form>
-				<br>
 				<form class="form-inline" method="post" action="/listar">
 
 					<div class="container" style="">
 
 						<div class="row" style="text-align: center;">
-							<div class="col-md-4" style="padding-bottom: 10px;">
-								
-							</div>
+							<div class="col-md-4" style="padding-bottom: 10px;"></div>
 							<div class="col-md-4"
 								style="text-align: center; width: 100%; padding-bottom: 10px;">
 								<input class="btn btn-primary btn-lg active" type="submit"
 									style="width: 100%;" value="Listar">
 							</div>
-							<br><br><br><br>
+							<br> <br> <br> <br>
 							<div class="loadermom" id="mom">
-							
-							<div class="loader"></div> 
+
+								<div class="loader"></div>
 							</div>
-							 
-							
-							
-							<div class="col-md-4" style="padding-bottom: 10px;">
-								
-							</div>
+
+
+
+							<div class="col-md-4" style="padding-bottom: 10px;"></div>
 						</div>
 
 					</div>
@@ -166,31 +163,48 @@
 	</footer>
 	<!-- End footer Area -->
 
-<style>
-
-.loadermom{
-
-width: 100%;
-margin-left: 45%;
-margin-top: 100px;
-display:none;
+	<style>
+.loadermom {
+	width: 100%;
+	margin-left: 45%;
+	margin-top: 100px;
+	display: none;
 }
+
 .loader {
-  border: 16px solid #ffffff; /* Light grey */
+	border: 16px solid #ffffff; /* Light grey */
+	border-top: 16px solid #0062cc;
+	border-bottom: 16px solid #0062cc;
+	border-radius: 50%;
+	width: 120px;
+	height: 120px;
+	animation: spin 2s linear infinite;
+}
+
+@
+keyframes spin { 0% {
+	transform: rotate(0deg);
+}
+100%
+{
+transform
+
+
+:
+
  
-  border-top: 16px solid #0062cc;
-  border-bottom: 16px solid #0062cc;
-  border-radius: 50%;
-  width: 120px;
-  height: 120px;
-  animation: spin 2s linear infinite;
-}
 
-@keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-}
+rotate
 
+
+(360
+deg
+);
+
+ 
+
+}
+}
 </style>
 
 

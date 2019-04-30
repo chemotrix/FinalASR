@@ -60,7 +60,7 @@ public class ScrapTweets {
 				}
 			}
 			System.out.println(content.toString());
-			nombreMap = convertToMap(nombreMap, content.toString());
+			nombreMap = convertToMap(nombreMap, content.toString(), NombreUsuario);
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -69,10 +69,11 @@ public class ScrapTweets {
 		return nombreMap;
 	}
 
-	private static Map<String, String> convertToMap(Map<String, String> nombreMap, String content) {
+	private static Map<String, String> convertToMap(Map<String, String> nombreMap, String content,
+			String NombreUsuario) {
 		// TODO Auto-generated method stub
 		int num = 0;
-		
+
 		System.out.println(
 				"--------------------------------------------------------------------------------------------------------");
 		System.out.println(content.toString());
@@ -83,74 +84,47 @@ public class ScrapTweets {
 			JSONObject obj = new JSONObject(content.toString());
 			Iterator<String> keys = obj.keys();
 			num = 0;
-			while (keys.hasNext() && num<10) {
+			while (keys.hasNext() && num < 10) {
 				String idUser = (String) keys.next();
 				String tweet = obj.getString(idUser);
 				String pic = picTwit(tweet);
 				alltweets = alltweets + tweet;
 				tweet = formatTweet(tweet);
-				
+
 				String tone = TAnalysis.get_sentiment(tweet);
 				// System.out.println(tone);
-				//System.out.println(idUser);
-				//System.out.println(tweet);
-				//System.out.println(pic);
+				// System.out.println(idUser);
+				// System.out.println(tweet);
+				// System.out.println(pic);
 				tone = formatTone(tone);
 
 				nombreMap.put("id" + num, idUser);
+				nombreMap.put("username" + num, NombreUsuario);
 				nombreMap.put("tweet" + num, tweet);
 				nombreMap.put("pic" + num, pic);
 				nombreMap.put("tone" + num, tone);
-				storeTweet(idUser, tweet, pic, tone);
+				storeTweet(idUser, tweet, pic, tone, NombreUsuario);
 				num++;
 			}
 
 		} catch (Exception e) {
 			System.out.println("DOCUMENT_TONE NOT FOUND FOR THIS TWEET");
 		}
-		System.out.println("________============______________");
 		
+		String insi = "";
 		
-		String insi = PInsights.get_pinsights(alltweets);
-		System.out.println(alltweets);
-		System.out.println("________============______________");
-		System.out.println(insi);
-		nombreMap.put("insi", insi);
-		/*
-		 * for (int i = 0; i < 10; i++) { // GET ID USER index = content.indexOf('"',
-		 * num); System.out.println(index); if (index != -1) {
-		 * 
-		 * String idUser = content.substring(index + 1, content.indexOf('"', index +
-		 * 2)); num = content.indexOf('"', index + 2) + 1;
-		 * 
-		 * // GET TWEET index = content.indexOf('"', num); String tweet =
-		 * content.substring(index + 1, content.indexOf('"', index + 2)); num =
-		 * content.indexOf('"', index + 2) + 1;
-		 * 
-		 * String pic = picTwit(tweet); tweet = formatTweet(tweet);
-		 * 
-		 * String tone = TAnalysis.get_sentiment(tweet); // System.out.println(tone);
-		 * System.out.println(idUser); System.out.println(tweet);
-		 * System.out.println(pic); tone = formatTone(tone);
-		 * 
-		 * nombreMap.put("id" + i, idUser); nombreMap.put("tweet" + i, tweet);
-		 * nombreMap.put("pic" + i, pic); nombreMap.put("tone" + i, tone); } else {
-		 * nombreMap = null; i = 10; }
-		 * 
-		 * }
-		 */
+		if (nombreMap.isEmpty()) {
+			nombreMap = null;
+		} else {
+			insi = PInsights.get_pinsights(alltweets);
+			nombreMap.put("insi", insi);
+		}
 
-		/*
-		 * System.out.println(content.substring(index + 1, content.indexOf('"', index +
-		 * 2))); System.out.println(content.indexOf('"'));
-		 * System.out.println(content.charAt(content.indexOf('"') + 1));
-		 */
-		// nombreMap.put("content", content);
 		return nombreMap;
 	}
 
-	private static void storeTweet(String idUser, String tweet, String pic, String tone) {
-		Tweet t = new Tweet(idUser, tweet, pic, tone);
+	private static void storeTweet(String idUser, String tweet, String pic, String tone, String username) {
+		Tweet t = new Tweet(idUser, tweet, pic, tone, username);
 
 		if (tweet != null && tweet != "") {
 			if (store.getDB() != null) {
@@ -208,7 +182,7 @@ public class ScrapTweets {
 			DecimalFormat df = new DecimalFormat("#.##");
 			df.setRoundingMode(RoundingMode.CEILING);
 			String s = df.format(score_def * 100);
-			//result = tonename_def + ", with score " + s + "%";
+			// result = tonename_def + ", with score " + s + "%";
 			result = tonename_def + " - " + s + "%";
 		}
 

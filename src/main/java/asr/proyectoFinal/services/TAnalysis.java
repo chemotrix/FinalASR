@@ -14,9 +14,6 @@ public class TAnalysis {
 		String s = null;
 		try {
 			text = Traductor.translate(text, "es", "en", false);
-			System.out.println("************************************TRANSALTE************************************");
-			System.out.println(text);
-			System.out.println("************************************TRANSLATE************************************");
 			String usernameColonPassword = "apikey:7Qv8UueUtTNZTLkHbyHhmoM6ZOujC_DLCDBqX5fnAZtM";
 			String basicAuthPayload = "Basic " + Base64.getEncoder().encodeToString(usernameColonPassword.getBytes());
 			BufferedReader httpResponseReader = null;

@@ -101,6 +101,7 @@ public class CloudantTweetStore
 	public Tweet update(String id, Tweet newTweet) {
 		Tweet visitor = db.find(Tweet.class, id);
 		visitor.setidTweet(newTweet.getidTweet());
+		visitor.setUsername(newTweet.getUsername());
 		visitor.setTweet(newTweet.getTweet());
 		visitor.setPic(newTweet.getPic());
 		visitor.setTone(newTweet.getTone());

@@ -1,7 +1,7 @@
 package asr.proyectoFinal.servlets;
 
 import java.io.IOException;
-
+import java.util.Collection;
 import java.util.Map;
 
 import javax.servlet.ServletException;
@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import asr.proyectoFinal.dao.CloudantTweetStore;
-
+import asr.proyectoFinal.dominio.Tweet;
 import asr.proyectoFinal.services.ScrapTweets;
 import asr.proyectoFinal.services.TAnalysis;
 
@@ -54,7 +54,7 @@ public class Controller extends HttpServlet {
 					request.setAttribute(entry.getKey(), entry.getValue());
 				}
 			} else {
-				request.setAttribute("map", "true");
+				request.setAttribute("null", "true");
 			}
 
 			break;
@@ -64,7 +64,8 @@ public class Controller extends HttpServlet {
 			if (store.getDB() != null) {
 				listar = "True";
 				tmp = store.getAll().toString();
-				request.setAttribute("cloudant", store.getAll());
+				Collection<Tweet> all_tweets = (Collection<Tweet>) store.getAll();
+				request.setAttribute("cloudant", all_tweets);
 			}
 			/*
 			 * else out.println("No hay DB");

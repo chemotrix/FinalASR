@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
-<%@ page import="java.util.Date"%>
+<%@ page import="java.util.*, asr.proyectoFinal.dominio.Tweet"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="zxx" class="no-js">
 <head>
@@ -95,10 +95,9 @@
 					</div>
 
 				</form>
-				<br>
 				<form class="form-inline" method="post" action="/listar">
 
-					<div class="container" style="">
+					<div class="container" style="margin-top: 10px;">
 
 						<div class="row" style="text-align: center;">
 							<div class="col-md-10" style="padding-bottom: 10px;"></div>
@@ -127,34 +126,89 @@
 
 		if (request.getAttribute("listar") == "True") {
 	%>
-	<div class="container">
+	<div class="container" style="margin-top: 50px; max-width: 1400px;">
 		<div
 			style="text-align: left; font-size: xx-large; font-weight: bold; color: #0062cc;">
 			BASE DE DATOS</div>
 		<br />
-		<div class="col-md-6">
-			<span style="font-weight: normal; font-size: large;"> Se
-				almacena cada Tweet con los siguientes atributos: </span>
-			<ul class="list-group list-group-flush">
-				<li class="list-group-item"
-					style="font-size: 20px; font-weight: 500;">- idTweet</li>
-				<li class="list-group-item"
-					style="font-size: 20px; font-weight: 500;">- tweet (el texto
-					que dice el tweet)</li>
-				<li class="list-group-item"
-					style="font-size: 20px; font-weight: 500;">- pic (si incluia
-					una foto o un video)</li>
-				<li class="list-group-item"
-					style="font-size: 20px; font-weight: 500;">- tone (sentiment
-					analysis del tweet)</li>
-			</ul>
+		<div class="row" style="text-align: center; ">
+			<div class="col-md-6" style="text-align: left;">
+				<span style="font-weight: normal; font-size: large;"> Se
+					almacena cada Tweet con los siguientes atributos: </span>
+				<ul class="list-group list-group-flush">
+					<li class="list-group-item"
+						style="font-size: 20px; font-weight: 500;">- IdTweet</li>
+					<li class="list-group-item"
+						style="font-size: 20px; font-weight: 500;">- Username</li>
+					<li class="list-group-item"
+						style="font-size: 20px; font-weight: 500;">- Tweet (texto)</li>
+					<li class="list-group-item"
+						style="font-size: 20px; font-weight: 500;">- Pic (Foto/Video)</li>
+					<li class="list-group-item"
+						style="font-size: 20px; font-weight: 500;">- Tone Analysis</li>
+				</ul>
+			</div>
+			<div class="col-md-6">
+				<img src="https://image.flaticon.com/icons/svg/23/23670.svg"
+					style="text-align: center; height: 200px;">
+			</div>
 		</div>
 	</div>
 	<br>
 	<br>
-	<div class="row">
-		<div class="container" style="text-align: justify;">
-			<%=request.getAttribute("cloudant")%>
+	<div class="container" style="margin-top: 100px; max-width: 1400px;">
+		<div class="row" style="text-align: left;">
+
+			<div class="row" style="width: 100%;">
+				<%
+					Collection<Tweet> all_tweets = (Collection<Tweet>) request.getAttribute("cloudant");
+						String tmpTone = "";
+						Iterator<Tweet> iterator = all_tweets.iterator();
+						while (iterator.hasNext()) {
+							Tweet t = (Tweet) iterator.next();
+
+							if (!t.getTone().contains("-")) {
+								t.setTone("Neutral - 50%");
+							}
+							if (t.getUsername() != null && t.getUsername() != "" && t.getUsername() != " ") {
+
+								System.out.println("-" + tmpTone + "-");
+				%>
+
+
+				<div class="col-md-3" style="margin-bottom: 40px;">
+					<div class="card" style="width: 100%; height: 100%;">
+						<div class="card-header"
+							style="text-align: center; font-size: 2vh; font-weight: 600;">
+							<img src="https://avatars.io/twitter/<%=t.getUsername()%>"
+								alt="https://avatars.io/twitter/<%=t.getUsername()%>"
+								class="rounded-circle border border-dark" height="50" width="50"
+								style="margin-right: 10px; border: 2px solid #222222 !important;">
+							<a href="http://twitter.com/<%=t.getUsername()%>">@<%=t.getUsername()%></a>
+							<p style="font-weight: 100; padding-top: 17px; text-align: left;">
+								<span style="font-weight: 600;">idTweet: </span><%=t.getidTweet()%></p>
+						</div>
+						<div class="card-body">
+							<blockquote class="blockquote mb-0">
+								<p style="padding-bottom: 30px;"><%=t.getTweet() + " "%>
+									<a href="http://<%=t.getPic()%>"><%=t.getPic()%></a>
+								</p>
+
+								<footer
+									style="color: #008000a6;font-weight: bold; font-size: 25px;position: absolute;left: 10px; text-align: center;bottom: 20px;width: 100%;">
+								<%=t.getTone()%></footer>
+							</blockquote>
+
+						</div>
+					</div>
+				</div>
+				<%
+					}
+						}
+				%>
+
+
+			</div>
 		</div>
 	</div>
 
@@ -165,11 +219,11 @@
 
 
 
-	<div class="container" style="padding-bottom: 150px;">
+	<div class="container" style="padding-bottom: 150px;margin-top: 0px;">
 		<br> <br>
 
 		<%
-			if (request.getAttribute("map") != "true") {
+			if (request.getAttribute("null") != "true") {
 		%>
 		<div class="row" style="text-align: center;">
 			<div class="col-md-10">
@@ -191,11 +245,10 @@
 
 		<div class="row" style="text-align: center;">
 			<div class="col-md-12">
-				<p class="text-center h2" style="margin-top: 80px; font-size: 48px;">
-				<div class="alert alert-danger" role="alert"
-					style="font-size: 25px;">
-					Oops! Ese usuario no existe, quizá estes buscando analizar a <a
-						href="/getTweets?username=vox_es">Vox_es</a>
+				<p class="text-center h2" style=" font-size: 48px;">
+				<div class="alert alert-danger" role="alert" style="font-size: 25px;">
+					Oops! Ese usuario no existe, quizá estes buscando analizar a
+					<a href="/getTweets?username=vox_es">Vox_es</a>
 				</div>
 				</p>
 
@@ -204,7 +257,7 @@
 		<%
 			}
 
-					if (request.getAttribute("map") != "true") {
+					if (request.getAttribute("null") != "true") {
 		%>
 		<div class="row" style="margin-top: 30px">
 
@@ -219,46 +272,35 @@
 					</div>
 
 					<br>
-					
-					
-					<p id = "Openness" class="bigtrait">
-					
-					</p>
-					<p id = "Conscientiousness" class="bigtrait">
-					
-					</p>
-					<p id = "Extraversion" class="bigtrait">
-					
-					</p>
-					<p id = "Agreeableness" class="bigtrait">
-					
-					</p>
-					<p id = "Neuroticism" class="bigtrait">
-					
-					</p>
-					
+
+
+					<p id="Openness" class="bigtrait"></p>
+					<p id="Conscientiousness" class="bigtrait"></p>
+					<p id="Extraversion" class="bigtrait"></p>
+					<p id="Agreeableness" class="bigtrait"></p>
+					<p id="Neuroticism" class="bigtrait"></p>
+
 					<script type="text/javascript">
-					
-					var ins = <%=request.getAttribute("insi")%>;
-					var i;
-					for (i = 0; i < ins.length; i++) {
-						
-						var name = ins[i]["name"]
-						
-						if (name == "Emotional range"){
-							name = "Neuroticism"
+						var ins =
+					<%=request.getAttribute("insi")%>
+						;
+						var i;
+						for (i = 0; i < ins.length; i++) {
+
+							var name = ins[i]["name"]
+
+							if (name == "Emotional range") {
+								name = "Neuroticism"
+							}
+							var per = ins[i]["percentile"]
+							console.log(name + ',' + per);
+
+							document.getElementById(name).innerHTML = name
+									+ ': ' + Math.round(per * 100) + '%';
 						}
-						var per = ins[i]["percentile"]
-						console.log(name+','+per);
-						
-						
-						document.getElementById(name).innerHTML = name +': ' +Math.round(per*100)+'%';
-						} 
-					
 					</script>
-					
-					
 				</div>
+
 			</div>
 
 			<div class="col-md-12">
@@ -376,20 +418,12 @@
 	</div>
 
 	<%
-		} else {
-	%>
-	<p>
-		NOT WORKING<%=tweet%><%=username%></p>
-	<%
 		}
 			}
 
 		}
-	%> %> </section>
+	%>  </section>
 	<!-- End brands Area -->
-
-
-
 	<script type="text/javascript">
 		function GetImage() {
 
@@ -492,17 +526,15 @@
 	content: " ";
 }
 
-.bigtrait{
+.bigtrait {
 	text-align: center;
-    margin-left: 0;
-    font-size: 25px;
-    color: #121c8f;
-    font-weight: bold;
-}
-	
-
+	margin-left: 0;
+	font-size: 25px;
+	color: #121c8f;
+	font-weight: bold;
 }
 
+}
 .timeline>li>.timeline-panel:after {
 	position: absolute;
 	top: 27px;
@@ -630,6 +662,7 @@
 	<script src="js/main.js"></script>
 
 	<nav id="mobile-nav"> </nav>
+
 
 	<div id="mobile-body-overly"></div>
 

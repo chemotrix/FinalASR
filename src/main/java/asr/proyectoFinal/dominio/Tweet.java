@@ -23,6 +23,7 @@ public class Tweet {
 	private String _id;
 	private String _rev;
 	private String idTweet = null;
+	private String username = null;
 	private String tweet = null;
 	private String pic = null;
 	private String tone = null;
@@ -32,13 +33,15 @@ public class Tweet {
 		this.tweet = "";
 		this.pic = "";
 		this.tone = "";
+		this.username = "";
 	}
 	
-	public Tweet(String idTweet,String tweet,String pic,String tone){
+	public Tweet(String idTweet,String tweet,String pic,String tone, String username){
 		this.idTweet = idTweet;
 		this.tweet = tweet;
 		this.pic = pic;
 		this.tone = tone;
+		this.username = username;
 	}
 	/**
 	 * Gets the ID.
@@ -67,6 +70,14 @@ public class Tweet {
 
 	public String getPic() {
 		return pic;
+	}
+	
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public String getUsername() {
+		return username;
 	}
 
 	public void setPic(String pic) {
@@ -115,7 +126,7 @@ public class Tweet {
 	@Override
 	public String toString() {
 		return "Tweet [idTweet=" + idTweet + ", tweet=" + tweet + ", pic=" + pic
-				+ ", tone=" + tone + "]";
+				+ ", tone=" + tone + ", username=" + username + "]";
 	}
 
 }
