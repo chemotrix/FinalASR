@@ -46,7 +46,7 @@
 				<a href="/"><img src="img/logo.png" alt="" title=""></a>
 			</div>
 			<div class="col-md-4">
-				<h1 class="" style="font-size: 6vw; text-align: center;">TweetsAnalyzer</h1>
+				<h1 class="" style="font-size: 3vw; text-align: center;">TweetsAnalyzer</h1>
 			</div>
 			<!-- #nav-menu-container -->
 		</div>
@@ -81,8 +81,14 @@
 									class="form-control form-control-lg" id="colFormLabelLg"
 									placeholder="Insertar aqui" style="width: inherit;">
 							</div>
+							<script>
+							function loadingani() {
+								document.getElementById("mom").style.display = "block";
+							    return false;
+							}
+							</script>
 							<div class="col-md-2" style="text-align: center; width: 100%;">
-								<input class="btn btn-primary btn-lg active" type="submit"
+								<input onsubmit="return loadingani();" class="btn btn-primary btn-lg active" type="submit"
 									value="Enviar" style="width: 100%;">
 							</div>
 						</div>
@@ -104,6 +110,14 @@
 								<input class="btn btn-primary btn-lg active" type="submit"
 									style="width: 100%;" value="Listar">
 							</div>
+							<br><br><br><br>
+							<div class="loadermom" id="mom">
+							
+							<div class="loader"></div> 
+							</div>
+							 
+							
+							
 							<div class="col-md-4" style="padding-bottom: 10px;">
 								
 							</div>
@@ -151,6 +165,35 @@
 	</footer>
 	<!-- End footer Area -->
 
+<style>
+
+.loadermom{
+
+width: 100%;
+margin-left: 45%;
+margin-top: 100px;
+display:none;
+}
+.loader {
+  border: 16px solid #ffffff; /* Light grey */
+ 
+  border-top: 16px solid #0062cc;
+  border-bottom: 16px solid #0062cc;
+  border-radius: 50%;
+  width: 120px;
+  height: 120px;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+</style>
+
+
+
 	<script src="js/vendor/jquery-2.2.4.min.js"></script>
 	<script src="js/popper.min.js"></script>
 	<script src="js/vendor/bootstrap.min.js"></script>
@@ -178,5 +221,7 @@
 	<nav id="mobile-nav"> </nav>
 	<div id="mobile-body-overly"></div>
 </body>
+
+
 
 </html>
