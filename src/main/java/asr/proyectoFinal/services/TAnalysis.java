@@ -27,7 +27,7 @@ public class TAnalysis {
 				HttpURLConnection urlConnection = (HttpURLConnection) serverUrl.openConnection();
 				urlConnection.setRequestMethod("GET");
 				urlConnection.addRequestProperty("Authorization", basicAuthPayload);
-				urlConnection.addRequestProperty("Accept-Language", "es");
+				//urlConnection.addRequestProperty("Accept-Language", "es");
 				httpResponseReader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
 				String lineRead;
 				while ((lineRead = httpResponseReader.readLine()) != null) {

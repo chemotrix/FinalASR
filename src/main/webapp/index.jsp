@@ -69,10 +69,11 @@
 				<script>
 				function loadingani() {
 					document.getElementById("mom").style.display = "block";
+					document.getElementById("elformo").submit(); 
 				    return false;
 				}
 				</script>
-				<form class="form-inline" method="post" action="/getTweets" onsubmit="return loadingani();">
+				<form class="form-inline" id = "elformo" method="post" action="/getTweets" >
 
 					<div class="container" style="">
 
@@ -88,7 +89,7 @@
 							</div>
 							
 							<div class="col-md-2" style="text-align: center; width: 100%;">
-								<input  class="btn btn-primary btn-lg active" type="submit"
+								<input  class="btn btn-primary btn-lg active" type="submit" onclick="return loadingani();"
 									value="Enviar" style="width: 100%;">
 							</div>
 						</div>
