@@ -219,7 +219,45 @@
 					</div>
 
 					<br>
-					<p><%=request.getAttribute("insi")%></p>
+					
+					
+					<p id = "Openness" class="bigtrait">
+					
+					</p>
+					<p id = "Conscientiousness" class="bigtrait">
+					
+					</p>
+					<p id = "Extraversion" class="bigtrait">
+					
+					</p>
+					<p id = "Agreeableness" class="bigtrait">
+					
+					</p>
+					<p id = "Neuroticism" class="bigtrait">
+					
+					</p>
+					
+					<script type="text/javascript">
+					
+					var ins = <%=request.getAttribute("insi")%>;
+					var i;
+					for (i = 0; i < ins.length; i++) {
+						
+						var name = ins[i]["name"]
+						
+						if (name == "Emotional range"){
+							name = "Neuroticism"
+						}
+						var per = ins[i]["percentile"]
+						console.log(name+','+per);
+						
+						
+						document.getElementById(name).innerHTML = name +': ' +Math.round(per*100)+'%';
+						} 
+					
+					</script>
+					
+					
 				</div>
 			</div>
 
@@ -452,6 +490,17 @@
 	border-right: 0 solid #ccc;
 	border-bottom: 15px solid transparent;
 	content: " ";
+}
+
+.bigtrait{
+	text-align: center;
+    margin-left: 0;
+    font-size: 25px;
+    color: #121c8f;
+    font-weight: bold;
+}
+	
+
 }
 
 .timeline>li>.timeline-panel:after {
