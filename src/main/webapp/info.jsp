@@ -70,8 +70,15 @@
 
 
 				<hr>
-
-				<form class="form-inline" method="post" action="/getTweets">
+				<script>
+					function loadingani() {
+						document.getElementById("mom").style.display = "block";
+						document.getElementById("elformo").submit();
+						return false;
+					}
+				</script>
+				<form class="form-inline" method="post" id="elformo"
+					action="/getTweets">
 
 					<div class="container" style="">
 
@@ -131,7 +138,7 @@
 			style="text-align: left; font-size: xx-large; font-weight: bold; color: #0062cc;">
 			BASE DE DATOS</div>
 		<br />
-		<div class="row" style="text-align: center; ">
+		<div class="row" style="text-align: center;">
 			<div class="col-md-6" style="text-align: left;">
 				<span style="font-weight: normal; font-size: large;"> Se
 					almacena cada Tweet con los siguientes atributos: </span>
@@ -219,7 +226,7 @@
 
 
 
-	<div class="container" style="padding-bottom: 150px;margin-top: 0px;">
+	<div class="container" style="padding-bottom: 150px; margin-top: 0px;">
 		<br> <br>
 
 		<%
@@ -245,10 +252,11 @@
 
 		<div class="row" style="text-align: center;">
 			<div class="col-md-12">
-				<p class="text-center h2" style=" font-size: 48px;">
-				<div class="alert alert-danger" role="alert" style="font-size: 25px;">
-					Oops! Ese usuario no existe, quizá estes buscando analizar a
-					<a href="/getTweets?username=vox_es">Vox_es</a>
+				<p class="text-center h2" style="font-size: 48px;">
+				<div class="alert alert-danger" role="alert"
+					style="font-size: 25px;">
+					Oops! Ese usuario no existe, quizá estes buscando analizar a <a
+						href="/getTweets?username=vox_es">Vox_es</a>
 				</div>
 				</p>
 
@@ -422,7 +430,7 @@
 			}
 
 		}
-	%>  </section>
+	%> </section>
 	<!-- End brands Area -->
 	<script type="text/javascript">
 		function GetImage() {

@@ -64,7 +64,6 @@
 			<div class="col-lg-12 col-md-12 home-about-left">
 
 
-
 				<hr>
 				<script>
 					function loadingani() {
@@ -73,62 +72,61 @@
 						return false;
 					}
 				</script>
-				<form class="form-inline" id="elformo" method="post"
+				<form class="form-inline" method="post" id="elformo"
 					action="/getTweets">
 
 					<div class="container" style="">
 
-						<div class="row">
-							<div class="col-md-3">
+						<div class="row" style="text-align: center;">
+							<div class="col-md-3" style="padding-bottom: 10px;">
 								<label class="h3" style="margin-top: 13px;">Usuario de
 									Twitter</label>
 							</div>
-							<div class="col-md-7">
+							<div class="col-md-7" style="padding-bottom: 10px;">
 								<input type="text" name="username"
 									class="form-control form-control-lg" id="colFormLabelLg"
 									placeholder="Insertar aqui" style="width: inherit;">
 							</div>
-
-							<div class="col-md-2" style="text-align: center; width: 100%;">
-								<input class="btn btn-primary btn-lg active" type="submit"
-									onclick="return loadingani();" value="Enviar"
-									style="width: 100%;">
-							</div>
-						</div>
-
-					</div>
-
-				</form>
-				<form class="form-inline" method="post" action="/listar">
-
-					<div class="container" style="">
-
-						<div class="row" style="text-align: center;">
-							<div class="col-md-4" style="padding-bottom: 10px;"></div>
-							<div class="col-md-4"
+							<div class="col-md-2"
 								style="text-align: center; width: 100%; padding-bottom: 10px;">
 								<input class="btn btn-primary btn-lg active" type="submit"
-									style="width: 100%;" value="Listar">
+									style="width: 100%;" value="Enviar">
 							</div>
-							<br> <br> <br> <br>
-							<div class="loadermom" id="mom">
-
-								<div class="loader"></div>
-							</div>
-
-
-
-							<div class="col-md-4" style="padding-bottom: 10px;"></div>
 						</div>
 
 					</div>
 
 				</form>
+
+
+				<div class="container" style="margin-top: 10px;">
+
+					<div class="row" style="text-align: center;">
+						<div class="col-md-8" style="padding-bottom: 10px;"></div>
+						<div class="col-md-2"
+							style="text-align: center; width: 100%; padding-bottom: 10px;">
+							<form class="form-inline" method="post" action="/listar">
+								<input class="btn btn-primary btn-lg active" type="submit"
+									style="width: 100%;" value="Listar">
+							</form>
+						</div>
+						<div class="col-md-2"
+							style="text-align: center; width: 100%; padding-bottom: 10px;">
+							<form class="form-inline" method="post" action="/deletedb">
+								<input class="btn btn-primary btn-lg active" type="submit"
+									style="width: 100%;" value="Borrar">
+							</form>
+						</div>
+					</div>
+
+				</div>
+
+
 				<br> <br>
 
 			</div>
 		</div>
-		<br> <br> <br> <br>
+
 	</div>
 	</section>
 	<!-- End brands Area -->
@@ -190,19 +188,32 @@ keyframes spin { 0% {
 transform
 
 
+
+
+
+
 :
 
+
+
  
+
+
 
 rotate
 
 
+
+
+
+
 (360
 deg
+
+
+
+
 );
-
- 
-
 }
 }
 </style>

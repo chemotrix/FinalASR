@@ -32,11 +32,12 @@ public class CloudantTweetStore
 {
 	private Database db = null;
 	private static final String databaseName = "mydb";
+	private static CloudantClient client = null;
 	
 	public CloudantTweetStore(){
-		CloudantClient cloudant = createClient();
-		if(cloudant!=null){
-		 db = cloudant.database(databaseName, true);
+		client = createClient();
+		if(client!=null){
+		 db = client.database(databaseName, true);
 		}
 	}
 	
@@ -85,6 +86,10 @@ public class CloudantTweetStore
 			return null;
 		}
         return docs;
+	}
+	
+	public CloudantClient getClient() {
+		return client;
 	}
 
 	

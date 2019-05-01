@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.cloudant.client.api.CloudantClient;
+
 import asr.proyectoFinal.dao.CloudantTweetStore;
 import asr.proyectoFinal.dominio.Tweet;
 import asr.proyectoFinal.services.ScrapTweets;
@@ -18,7 +20,7 @@ import asr.proyectoFinal.services.TAnalysis;
 /**
  * Servlet implementation class Controller
  */
-@WebServlet(urlPatterns = { "/listar", "/insertar", "/tanalysis", "/texttospeech", "/getTweets" })
+@WebServlet(urlPatterns = { "/listar", "/insertar", "/tanalysis", "/texttospeech", "/getTweets","/deletedb"})
 public class Controller extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -72,6 +74,12 @@ public class Controller extends HttpServlet {
 			 */
 			request.setAttribute("listar", listar);
 			System.out.println(tmp);
+			break;
+		case "/deletedb":
+			CloudantTweetStore cloudantTweetStore = new CloudantTweetStore();
+			CloudantClient client = cloudantTweetStore.getClient();
+			client.deleteDB("mydb");
+			client.createDB("mydb");
 			break;
 
 		case "/tanalysis":
