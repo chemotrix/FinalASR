@@ -37,12 +37,7 @@
 <link rel="stylesheet" href="css/main.css">
 </head>
 <body style="display: block;">
-	<button type="button" id="mobile-nav-toggle">
-		<i class="lnr lnr-menu"></i>
-	</button>
-	<button type="button" id="mobile-nav-toggle">
-		<i class="lnr lnr-menu"></i>
-	</button>
+
 	<header id="header" class="">
 	<div class="container main-menu">
 		<div class="row">
@@ -59,10 +54,10 @@
 	</header>
 	<!-- #header -->
 
-
+	<!-- #header -->
 
 	<!-- start banner Area -->
-	<section class="home-about-area" style="padding-top: 163px;">
+	<section class="home-about-area" style="padding-top: 180px;">
 
 	<div class="container">
 		<div class="row align-items-center justify-content-between">
@@ -102,22 +97,32 @@
 					</div>
 
 				</form>
-				<form class="form-inline" method="post" action="/listar">
 
-					<div class="container" style="margin-top: 10px;">
+				<hr>
+				<div class="container" style="margin-top: 10px;">
 
-						<div class="row" style="text-align: center;">
-							<div class="col-md-10" style="padding-bottom: 10px;"></div>
-							<div class="col-md-2"
-								style="text-align: center; width: 100%; padding-bottom: 10px;">
-								<input class="btn btn-secondary btn-lg secondary" type="submit"
+					<div class="row" style="text-align: center;">
+						<div class="col-md-3" style="padding-bottom: 10px;"></div>
+						<div class="col-md-3"
+							style="text-align: center; width: 100%; padding-bottom: 10px;">
+							<form class="form-inline" method="post" action="/listar">
+								<input class="btn btn-secondary active" type="submit"
 									style="width: 100%;" value="Listar">
-							</div>
+							</form>
 						</div>
-
+						<div class="col-md-4"
+							style="text-align: center; width: 100%; padding-bottom: 10px;">
+							<form class="form-inline" method="post" action="/deletedb">
+								<input class="btn btn-danger active" type="submit"
+									style="width: 100%;" value="Reset DataBase">
+							</form>
+						</div>
+						<div class="col-md-2" style="padding-bottom: 10px;"></div>
 					</div>
 
-				</form>
+				</div>
+
+
 				<br> <br>
 
 			</div>
