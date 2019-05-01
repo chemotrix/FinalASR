@@ -155,9 +155,8 @@
 
 
 	<!-- start footer Area -->
-	<footer
+	<footer class=""
 		style="
-    position: fixed;
     height: 100px;
     background-color: black;
     bottom: 0px;
@@ -165,13 +164,14 @@
     right: 0px;
     margin-bottom: 0px;
 ">
-	<div class="container">
-		<div class="row">
-			<div class="col-lg-12 col-md-12 col-sm-12">
+	<div class="" style="background-color: black;">
+		<div class="container">
+			<div class="col-lg-12 col-md-12 col-sm-12"
+				style="background-color: black;">
 				<div class="single-footer-widget">
 					<br> <br>
 					<h3 style="color: #fff;">ARQUITECTURA DE SERVICIOS EN RED</h3>
-					<h4>&copy; Chema Rodriguez &amp; Carlos Arranz</h4>
+					<h4>© Chema Rodriguez &amp; Carlos Arranz</h4>
 				</div>
 				<br> <br>
 			</div>
@@ -216,13 +216,17 @@ transform
 
 
 
+
+
 :
 
 
 
 
 
+
  
+
 
 
 
@@ -239,8 +243,12 @@ rotate
 
 
 
+
+
 (360
 deg
+
+
 
 
 
