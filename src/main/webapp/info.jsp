@@ -110,7 +110,7 @@
 							<div class="col-md-10" style="padding-bottom: 10px;"></div>
 							<div class="col-md-2"
 								style="text-align: center; width: 100%; padding-bottom: 10px;">
-								<input class="btn btn-primary btn-lg active" type="submit"
+								<input class="btn btn-secondary btn-lg secondary" type="submit"
 									style="width: 100%;" value="Listar">
 							</div>
 						</div>

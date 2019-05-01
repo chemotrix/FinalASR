@@ -38,6 +38,7 @@
 </head>
 <body style="display: block;">
 
+	
 	<header id="header" class="">
 	<div class="container main-menu">
 		<div class="row">
@@ -46,7 +47,7 @@
 				<a href="/"><img src="img/logo.png" alt="" title=""></a>
 			</div>
 			<div class="col-md-4">
-				<h1 class="" style="font-size: 3vw; text-align: center;">TweetsAnalyzer</h1>
+				<h1 class="" style="font-size: 6vw; text-align: center;">TweetsAnalyzer</h1>
 			</div>
 			<!-- #nav-menu-container -->
 		</div>
@@ -98,25 +99,26 @@
 
 				</form>
 
-
+<hr>
 				<div class="container" style="margin-top: 10px;">
 
 					<div class="row" style="text-align: center;">
-						<div class="col-md-8" style="padding-bottom: 10px;"></div>
-						<div class="col-md-2"
+						<div class="col-md-3" style="padding-bottom: 10px;"></div>
+						<div class="col-md-3"
 							style="text-align: center; width: 100%; padding-bottom: 10px;">
 							<form class="form-inline" method="post" action="/listar">
-								<input class="btn btn-primary btn-lg active" type="submit"
+								<input class="btn btn-secondary active" type="submit"
 									style="width: 100%;" value="Listar">
 							</form>
 						</div>
-						<div class="col-md-2"
+						<div class="col-md-4"
 							style="text-align: center; width: 100%; padding-bottom: 10px;">
 							<form class="form-inline" method="post" action="/deletedb">
-								<input class="btn btn-primary btn-lg active" type="submit"
-									style="width: 100%;" value="Borrar">
+								<input class="btn btn-danger active" type="submit"
+									style="width: 100%;" value="Reset DataBase">
 							</form>
 						</div>
+						<div class="col-md-2" style="padding-bottom: 10px;"></div>
 					</div>
 
 				</div>
