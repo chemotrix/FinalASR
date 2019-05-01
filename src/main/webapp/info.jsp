@@ -71,6 +71,18 @@
 						document.getElementById("elformo").submit();
 						return false;
 					}
+					
+					function loadingani2() {
+						document.getElementById("mom").style.display = "block";
+						document.getElementById("elformo2").submit();
+						return false;
+					}
+					
+					function loadingani3() {
+						document.getElementById("mom").style.display = "block";
+						document.getElementById("elformo3").submit();
+						return false;
+					}
 				</script>
 				<form class="form-inline" method="post" id="elformo"
 					action="/getTweets">
@@ -89,7 +101,7 @@
 							</div>
 							<div class="col-md-2"
 								style="text-align: center; width: 100%; padding-bottom: 10px;">
-								<input class="btn btn-primary btn-lg active" type="submit"
+								<input class="btn btn-primary btn-lg active" type="submit" onclick="return loadingani();"
 									style="width: 100%;" value="Enviar">
 							</div>
 						</div>
@@ -105,15 +117,15 @@
 						<div class="col-md-3" style="padding-bottom: 10px;"></div>
 						<div class="col-md-3"
 							style="text-align: center; width: 100%; padding-bottom: 10px;">
-							<form class="form-inline" method="post" action="/listar">
-								<input class="btn btn-secondary active" type="submit"
+							<form class="form-inline" method="post" action="/listar" id="elformo2">
+								<input class="btn btn-secondary active" type="submit" onclick="return loadingani2();"
 									style="width: 100%;" value="Listar">
 							</form>
 						</div>
 						<div class="col-md-4"
 							style="text-align: center; width: 100%; padding-bottom: 10px;">
-							<form class="form-inline" method="post" action="/deletedb">
-								<input class="btn btn-danger active" type="submit"
+							<form class="form-inline" method="post" action="/deletedb" id="elformo3">
+								<input class="btn btn-danger active" type="submit" onclick="return loadingani3();"
 									style="width: 100%;" value="Reset DataBase">
 							</form>
 						</div>
