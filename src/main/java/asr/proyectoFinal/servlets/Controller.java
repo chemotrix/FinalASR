@@ -80,6 +80,8 @@ public class Controller extends HttpServlet {
 			CloudantClient client = cloudantTweetStore.getClient();
 			client.deleteDB("mydb");
 			client.createDB("mydb");
+			request.setAttribute("reset", "true");
+
 			break;
 
 		case "/tanalysis":
