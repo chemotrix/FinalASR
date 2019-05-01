@@ -38,7 +38,7 @@
 </head>
 <body style="display: block;">
 
-	
+
 	<header id="header" class="">
 	<div class="container main-menu">
 		<div class="row">
@@ -99,7 +99,7 @@
 
 				</form>
 
-<hr>
+				<hr>
 				<div class="container" style="margin-top: 10px;">
 
 					<div class="row" style="text-align: center;">
@@ -120,16 +120,20 @@
 						</div>
 						<div class="col-md-2" style="padding-bottom: 10px;"></div>
 					</div>
+					<div class="row">
+						<div class="loadermom" id="mom">
+
+							<div class="loader"></div>
+						</div>
+					</div>
+
+
+					<br> <br>
 
 				</div>
-
-
-				<br> <br>
-
 			</div>
-		</div>
 
-	</div>
+		</div>
 	</section>
 	<!-- End brands Area -->
 
@@ -194,11 +198,15 @@ transform
 
 
 
+
+
 :
 
 
 
+
  
+
 
 
 
@@ -209,8 +217,12 @@ rotate
 
 
 
+
+
 (360
 deg
+
+
 
 
 

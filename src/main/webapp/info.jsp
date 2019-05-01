@@ -119,6 +119,12 @@
 						</div>
 						<div class="col-md-2" style="padding-bottom: 10px;"></div>
 					</div>
+					<div class="row">
+						<div class="loadermom" id="mom">
+
+							<div class="loader"></div>
+						</div>
+					</div>
 
 				</div>
 
