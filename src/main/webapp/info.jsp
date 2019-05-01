@@ -83,9 +83,17 @@
 									Twitter</label>
 							</div>
 							<div class="col-md-7" style="padding-bottom: 10px;">
-								<input type="text" name="username"
-									class="form-control form-control-lg" id="colFormLabelLg"
-									placeholder="Insertar aqui" style="width: inherit;">
+								<label class="sr-only" for="inlineFormInputGroup">Username</label>
+								<div class="input-group mb-2">
+									<div class="input-group-prepend">
+										<div class="input-group-text">@</div>
+									</div>
+
+
+									<input type="text" name="username"
+										class="form-control form-control-lg" id="colFormLabelLg"
+										placeholder="Vox_es" style="width: inherit;">
+								</div>
 							</div>
 							<div class="col-md-2"
 								style="text-align: center; width: 100%; padding-bottom: 10px;">
@@ -142,27 +150,26 @@
 	<%
 		if (request.getAttribute("reset") == "true") {
 	%>
-	
+
 	<div class="row" style="text-align: center;">
-			<div class="col-md-12">
-				<p class="text-center h2" style="font-size: 48px;">
-				<div class="alert alert-success" role="alert"
-					style="font-size: 25px;">
-					La base de datos ha sido reseteada satisfactoriamente.
-				</div>
-				</p>
+		<div class="col-md-12">
+			<p class="text-center h2" style="font-size: 48px;">
+			<div class="alert alert-success" role="alert"
+				style="font-size: 25px;">La base de datos ha sido reseteada
+				satisfactoriamente.</div>
+			</p>
 
-			</div>
 		</div>
+	</div>
 	<%
- 	}
- 	String tone = (String) request.getAttribute("tone");
- 	String tweet = (String) request.getAttribute("tweet");
- 	String username = (String) request.getAttribute("username");
- 	String id0 = (String) request.getAttribute("id0");
+		}
+		String tone = (String) request.getAttribute("tone");
+		String tweet = (String) request.getAttribute("tweet");
+		String username = (String) request.getAttribute("username");
+		String id0 = (String) request.getAttribute("id0");
 
- 	if (request.getAttribute("listar") == "True") {
- %>
+		if (request.getAttribute("listar") == "True") {
+	%>
 	<div class="container" style="margin-top: 50px; max-width: 1400px;">
 		<div
 			style="text-align: left; font-size: xx-large; font-weight: bold; color: #0062cc;">

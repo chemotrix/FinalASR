@@ -84,14 +84,23 @@
 									Twitter</label>
 							</div>
 							<div class="col-md-7" style="padding-bottom: 10px;">
-								<input type="text" name="username"
-									class="form-control form-control-lg" id="colFormLabelLg"
-									placeholder="Insertar aqui" style="width: inherit;">
+								<label class="sr-only" for="inlineFormInputGroup">Username</label>
+								<div class="input-group mb-2">
+									<div class="input-group-prepend">
+										<div class="input-group-text">@</div>
+									</div>
+
+
+									<input type="text" name="username"
+										class="form-control form-control-lg" id="colFormLabelLg"
+										placeholder="Vox_es" style="width: inherit;">
+								</div>
 							</div>
 							<div class="col-md-2"
 								style="text-align: center; width: 100%; padding-bottom: 10px;">
-								<input class="btn btn-primary btn-lg active" type="submit" onclick="return loadingani();"
-									style="width: 100%;" value="Enviar">
+								<input class="btn btn-primary btn-lg active" type="submit"
+									onclick="return loadingani();" style="width: 100%;"
+									value="Enviar">
 							</div>
 						</div>
 
@@ -106,15 +115,18 @@
 						<div class="col-md-3" style="padding-bottom: 10px;"></div>
 						<div class="col-md-3"
 							style="text-align: center; width: 100%; padding-bottom: 10px;">
-							<form class="form-inline" method="post" action="/listar" id="elformo2">
-								<input class="btn btn-secondary active" type="submit" 
+							<form class="form-inline" method="post" action="/listar"
+								id="elformo2">
+								<input class="btn btn-secondary active" type="submit"
 									style="width: 100%;" value="Listar">
 							</form>
 						</div>
 						<div class="col-md-4"
 							style="text-align: center; width: 100%; padding-bottom: 10px;">
-							<form class="form-inline" method="post" action="/deletedb" id="elformo3">
-								<input class="btn btn-danger active" type="submit" "
+							<form class="form-inline" method="post" action="/deletedb"
+								id="elformo3">
+								<input class="btn btn-danger active" type="submit"
+									"
 									style="width: 100%;" value="Reset DataBase">
 							</form>
 						</div>
@@ -202,12 +214,16 @@ transform
 
 
 
+
+
 :
 
 
 
 
+
  
+
 
 
 
@@ -221,8 +237,12 @@ rotate
 
 
 
+
+
 (360
 deg
+
+
 
 
 
